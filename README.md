@@ -28,7 +28,7 @@ https://www.docker.com/products/docker-desktop/
 
 ## Get the MeSH-CZ-RDF dataset
 
-    https://github.com/NLK-NML/MeSH-CZ-RDF/blob/main/2025/MeSH-CZ_2025.nq.gz
+https://github.com/NLK-NML/MeSH-CZ-RDF/blob/main/2025/MeSH-CZ_2025.nq.gz
 
 - place it in the **MeSH-CZ-RDF-Docker/_imports** subdir and
 - rename it to: **meshcz.nq.gz**
