@@ -21,7 +21,8 @@ https://git-scm.com/
 
 https://www.docker.com/products/docker-desktop/
 
-## Clone this repo into a dir - ie. MeSH-CZ-RDF-Docker
+## Clone this repo into a dir 
+- ie. MeSH-CZ-RDF-Docker
 
      git clone https://github.com/NLK-NML/MeSH-CZ-RDF-Docker.git
 
@@ -29,8 +30,8 @@ https://www.docker.com/products/docker-desktop/
 
     https://github.com/NLK-NML/MeSH-CZ-RDF/blob/main/2025/MeSH-CZ_2025.nq.gz
 
-- place it in the MeSH-CZ-RDF-Docker/_imports subdir and
-- rename it to meshcz.nq.gz
+- place it in the **MeSH-CZ-RDF-Docker/_imports** subdir and
+- rename it to: **meshcz.nq.gz**
 
 ## Get Jena Fuseki Docker files
 
