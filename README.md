@@ -1,4 +1,4 @@
-# Provide MeSH-CZ-RDF using a SPARQL server
+# Publishing MeSH-CZ-RDF using a SPARQL server
 Container support for MeSH-CZ-RDF
 
 > Work in progress ...
