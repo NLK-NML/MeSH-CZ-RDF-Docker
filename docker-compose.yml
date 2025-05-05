@@ -2,12 +2,12 @@
 
 services:
   fuseki-init:
+    container_name: meshcz-jena-loader
     image: openjdk:21-slim
     volumes:
       - ./_imports:/fuseki/_imports
       - ./configuration:/fuseki/configuration
       - ./databases:/fuseki/databases
-      - ./logs:/fuseki/logs
       - ./meshcz.sh:/meshcz.sh
       - ./tools:/fuseki/tools
     entrypoint: /meshcz.sh
