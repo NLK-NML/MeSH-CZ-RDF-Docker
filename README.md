@@ -57,7 +57,7 @@ curl --ssl-no-revoke -O https://raw.githubusercontent.com/apache/jena/main/jena-
 
 	docker-compose run --rm --service-ports fuseki-init
 
-## Test run:
+## Run:
 
      docker-compose run --rm --service-ports fuseki
 
