@@ -1,9 +1,7 @@
-# MeSH-CZ-RDF-Docker
+# Publishing MeSH-CZ-RDF using a SPARQL server
 Container support for MeSH-CZ-RDF
 
 > Work in progress ...
-
-# Provide MeSH-CZ-RDF using a SPARQL server
 
 This quide uses Apache Jena Fuseki server - https://jena.apache.org/documentation/fuseki2/index.html
 
@@ -23,16 +21,17 @@ https://git-scm.com/
 
 https://www.docker.com/products/docker-desktop/
 
-## Clone this repo into a dir - ie. MeSH-CZ-RDF-Docker
+## Clone this repo into a dir 
+- ie. MeSH-CZ-RDF-Docker
 
-     git clone https://github.com/NLK-NML/MeSH-CZ-RDF-Docker.git
+      git clone https://github.com/NLK-NML/MeSH-CZ-RDF-Docker.git
 
 ## Get the MeSH-CZ-RDF dataset
 
     https://github.com/NLK-NML/MeSH-CZ-RDF/blob/main/2025/MeSH-CZ_2025.nq.gz
 
-- place it in the MeSH-CZ-RDF-Docker/_imports subdir and
-- rename it to meshcz.nq.gz
+- place it in the **MeSH-CZ-RDF-Docker/_imports** subdir and
+- rename it to: **meshcz.nq.gz**
 
 ## Get Jena Fuseki Docker files
 
