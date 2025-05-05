@@ -9,10 +9,6 @@ This quide uses Apache Jena Fuseki server - https://jena.apache.org/documentatio
 
 Install the following tools if not available on your system.
 
-### curl
-
-https://curl.se/download.html
-
 ### Git
 
 https://git-scm.com/
@@ -21,43 +17,25 @@ https://git-scm.com/
 
 https://www.docker.com/products/docker-desktop/
 
-## Clone this repo into a dir 
+## Clone or download this repo into a dir
 - ie. MeSH-CZ-RDF-Docker
 
       git clone https://github.com/NLK-NML/MeSH-CZ-RDF-Docker.git
 
-## Get the MeSH-CZ-RDF dataset
+## Start Docker Desktop
 
-https://github.com/NLK-NML/MeSH-CZ-RDF/blob/main/2025/MeSH-CZ_2025.nq.gz
+### Bootstrap
 
-- place it in the **MeSH-CZ-RDF-Docker/_imports** subdir and
-- rename it to: **meshcz.nq.gz**
+     docker-compose -f docker-compose.yml build
 
-## Get Jena Fuseki Docker files
+### Rebuild with specific versions
 
-https://github.com/apache/jena/tree/main/jena-fuseki2/jena-fuseki-docker
+     docker-compose -f docker-compose.yml build --build-arg JENA_VERSION=5.4.0 --build-arg MESH_YEAR=2025
 
-Download the important files with curl - run:
+### Run
 
-```
-curl --ssl-no-revoke -O https://raw.githubusercontent.com/apache/jena/main/jena-fuseki2/jena-fuseki-docker/Dockerfile
-curl --ssl-no-revoke -O https://raw.githubusercontent.com/apache/jena/main/jena-fuseki2/jena-fuseki-docker/download.sh
-curl --ssl-no-revoke -O https://raw.githubusercontent.com/apache/jena/main/jena-fuseki2/jena-fuseki-docker/entrypoint.sh
-curl --ssl-no-revoke -O https://raw.githubusercontent.com/apache/jena/main/jena-fuseki2/jena-fuseki-docker/log4j2.properties
-curl --ssl-no-revoke -O https://raw.githubusercontent.com/apache/jena/main/jena-fuseki2/jena-fuseki-docker/pom.xml
-```
+     docker-compose -f docker-compose.yml run --rm --service-ports fuseki
 
-# Start Docker Desktop
+### Debug
 
-## Build
-
-     docker-compose -f docker-compose.yml build --build-arg JENA_VERSION=5.4.0
-
-## Import MeSH-CZ dataset
-
-     docker-compose run --rm --service-ports fuseki-init
-
-## Run
-
-     docker-compose run --rm --service-ports fuseki
-
+     docker run --rm -it fuseki sh
