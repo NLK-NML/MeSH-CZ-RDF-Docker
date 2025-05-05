@@ -49,23 +49,15 @@ curl --ssl-no-revoke -O https://raw.githubusercontent.com/apache/jena/main/jena-
 
 # Start Docker Desktop
 
-## Build:
+## Build
 
      docker-compose -f docker-compose.yml build --build-arg JENA_VERSION=5.4.0
 
 ## Import MeSH-CZ dataset
 
-	docker-compose run --rm --service-ports fuseki-init
+     docker-compose run --rm --service-ports fuseki-init
 
-## Run:
+## Run
 
      docker-compose run --rm --service-ports fuseki
-
-
-
-
-
-
-
-
 
