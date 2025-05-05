@@ -24,7 +24,7 @@ https://www.docker.com/products/docker-desktop/
 ## Clone this repo into a dir 
 - ie. MeSH-CZ-RDF-Docker
 
-     git clone https://github.com/NLK-NML/MeSH-CZ-RDF-Docker.git
+      git clone https://github.com/NLK-NML/MeSH-CZ-RDF-Docker.git
 
 ## Get the MeSH-CZ-RDF dataset
 
