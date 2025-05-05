@@ -1,9 +1,7 @@
-# MeSH-CZ-RDF-Docker
+# Provide MeSH-CZ-RDF using a SPARQL server
 Container support for MeSH-CZ-RDF
 
 > Work in progress ...
-
-# Provide MeSH-CZ-RDF using a SPARQL server
 
 This quide uses Apache Jena Fuseki server - https://jena.apache.org/documentation/fuseki2/index.html
 
