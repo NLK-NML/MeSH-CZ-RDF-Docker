@@ -13,17 +13,19 @@ Install the following tools if not available on your system.
 https://www.docker.com/products/docker-desktop/
 
 ## Copy this repo
-- into a directory **MeSH-CZ-RDF-Docker**
+- into a directory - for example:   **MeSH-CZ-RDF-Docker**
 
-### Download
+- download:
 
 https://github.com/NLK-NML/MeSH-CZ-RDF-Docker/archive/refs/heads/main.zip
 
-### Clone using Git
+- or clone using Git:
 
       git clone https://github.com/NLK-NML/MeSH-CZ-RDF-Docker.git
 
 ## Start Docker Desktop
+
+When the Docker Desktop is running you can use the following commands.
 
 ### Build the image
 
