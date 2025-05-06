@@ -7,8 +7,6 @@ FROM openjdk:21-slim
 ARG MESH_YEAR=2025
 ENV MESH_YEAR=${MESH_YEAR}
 
-ENV JVM_ARGS="-Xmx8G"
-
 # Install dependencies
 RUN apt-get update && \
     apt-get install -y curl unzip && \
@@ -20,6 +18,8 @@ ENV JENA_HOME=apache-jena-${JENA_VERSION}
 ENV FUSEKI_HOME=apache-jena-fuseki-${JENA_VERSION}
 ENV FUSEKI_BASE=/fuseki
 ENV PATH="${JENA_HOME}/bin:${FUSEKI_HOME}:${PATH}"
+ENV JAVA_OPTIONS="-Xms8G -Xmx8G"
+ENV JVM_ARGS="-Xmx8G"
 
 # Create directory structure
 RUN mkdir -p ${FUSEKI_BASE}/databases/meshcz \
@@ -45,14 +45,13 @@ RUN tdb2.tdbloader  \
     --loc=databases/meshcz _imports/meshcz.nq.gz && \
     java --add-modules jdk.incubator.vector \
     -cp ${FUSEKI_HOME}/fuseki-server.jar jena.textindexer \
-    --desc=configuration/meshcz.ttl
-
-# && \ rm _imports/meshcz.nq.gz
+    --desc=configuration/meshcz.ttl && \
+	rm _imports/meshcz.nq.gz
 
 # Expose the Fuseki port
 EXPOSE 3030
 
 # Run Fuseki using the baked configuration
-CMD ["sh", "-c", "fuseki-server", "--config=configuration/meshcz.ttl"]
-#CMD ["sh", "-c", "exec java $JVM_ARGS -jar ${FUSEKI_HOME}/fuseki-server.jar --config=configuration/meshcz.ttl"]
+#CMD ["sh", "-c", "fuseki-server", "--loc=databases/meshcz", "--config=configuration/meshcz.ttl", "--ping"]
+CMD ["sh", "-c", "exec java $JVM_ARGS --add-modules jdk.incubator.vector -jar $FUSEKI_HOME/fuseki-server.jar --loc=databases/meshcz --config=configuration/meshcz.ttl"]
 
