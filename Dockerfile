@@ -53,5 +53,5 @@ EXPOSE 3030
 
 # Run Fuseki using the baked configuration
 #CMD ["sh", "-c", "fuseki-server", "--config=configuration/meshcz.ttl", "--ping"]
-CMD ["sh", "-c", "exec java $JVM_ARGS --add-modules jdk.incubator.vector -jar $FUSEKI_HOME/fuseki-server.jar --config=configuration/meshcz.ttl"]
+CMD ["sh", "-c", "exec java $JVM_ARGS --add-modules jdk.incubator.vector -jar $FUSEKI_HOME/fuseki-server.jar"]
 
