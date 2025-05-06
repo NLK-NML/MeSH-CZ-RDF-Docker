@@ -6,7 +6,10 @@ services:
     container_name: fuseki-meshcz
     ports:
       - "3030:3030"
+    environment:
+      JAVA_OPTIONS: "-Xms4g -Xmx4g"
     command: ["sh", "-c", "fuseki-server", "--ping"]
+    #command: ["java", "-jar", "apache-jena-fuseki-5.4.0/fuseki-server.jar"]
     #volumes:
     #  - ./logs:/fuseki/logs
 
