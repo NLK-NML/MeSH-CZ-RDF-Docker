@@ -1,0 +1,12 @@
+# Updated:  2025-05-06
+
+services:
+  fuseki:
+    image: fuseki:meshcz
+    container_name: fuseki-meshcz
+    ports:
+      - "3030:3030"
+    command: ["sh", "-c", "fuseki-server", "--ping"]
+    #volumes:
+    #  - ./logs:/fuseki/logs
+

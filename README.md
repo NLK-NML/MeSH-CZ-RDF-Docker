@@ -26,18 +26,54 @@ https://github.com/NLK-NML/MeSH-CZ-RDF-Docker/archive/refs/heads/main.zip
 
 ## Start Docker Desktop
 
-### Build
+### Build the image
 
-     docker build -t fuseki:mesh-2025 .
+     docker build -t fuseki:meshcz .
 
-### Re-build
+### Re-build the image
 
-     docker build -t fuseki:mesh-2025 . --no-cache
+     docker build -t fuseki:meshcz . --no-cache --build-arg MESH_YEAR=2025
 
-### Run
+### Run the container - debug
 
-     docker run --rm -p 3030:3030 fuseki:mesh-2025 --name fuseki-test
+     docker-compose up
+
+Press CTRL+C to stop
+
+### Run the container as service
+
+     docker-compose up -d
+
+### Stop the container
+
+     docker-compose down
 
 ### Debug
 
-     docker exec -it fuseki-test sh
+     docker exec -it fuseki-meshcz sh
+
+# Run some queries
+
+http://127.0.0.1:3030/#/dataset/meshcz/query
+
+```
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX meshv:  <http://id.nlm.nih.gov/mesh/vocab#>
+PREFIX mesh:   <http://id.nlm.nih.gov/mesh/>
+PREFIX text:   <http://jena.apache.org/text#>
+PREFIX meshx:  <http://mesh.medvik.cz/link/>
+PREFIX mesht:  <http://www.medvik.cz/schema/mesh/vocab/#>
+
+SELECT ?s ?p ?o
+WHERE {
+  ?s ?p ?o .
+}
+LIMIT 10
+```
+
+
+
+
