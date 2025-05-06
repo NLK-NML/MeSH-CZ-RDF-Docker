@@ -1,4 +1,4 @@
-# Publish MeSH-CZ using SPARQL server
+# Publish MeSH-CZ RDF dataset using SPARQL server
 
 This quide deploys [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/index.html) server in a standalone Docker container.
 
