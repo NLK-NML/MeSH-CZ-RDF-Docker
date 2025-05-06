@@ -1,9 +1,8 @@
 # Publish MeSH-CZ using SPARQL server
-Container support for MeSH-CZ-RDF
 
 > Work in progress ...
 
-This quide uses Apache Jena Fuseki server - https://jena.apache.org/documentation/fuseki2/index.html
+This quide deployes [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/index.html) server as a standalone container.
 
 ## Prerequisites
 
