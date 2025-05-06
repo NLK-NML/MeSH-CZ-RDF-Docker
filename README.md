@@ -11,7 +11,8 @@ For production deployment is necessary:
 
 ## Prerequisites
 
-The useki:meshcz Docker image requires 8GB of RAM - if it is not possible to allocate modify in the Dockerfile:
+The fuseki:meshcz Docker image requires 8GB of RAM.
+If your system does not have enough memory, modify in the Dockerfile accordingly:
 
      ENV JAVA_OPTIONS="-Xms8G -Xmx8G"
      ENV JVM_ARGS="-Xmx8G"
