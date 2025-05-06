@@ -26,18 +26,18 @@ https://github.com/NLK-NML/MeSH-CZ-RDF-Docker/archive/refs/heads/main.zip
 
 ## Start Docker Desktop
 
-### Bootstrap
+### Build
 
-     docker-compose -f docker-compose.yml build
+     docker build -t fuseki:mesh-2025 .
+
+### Re-build
+
+     docker build -t fuseki:mesh-2025 . --no-cache
 
 ### Run
 
-     docker-compose -f docker-compose.yml run --rm --service-ports fuseki
-
-### Rebuild with specific versions
-
-     docker-compose -f docker-compose.yml build --no-cache --build-arg JENA_VERSION=5.4.0 --build-arg MESH_YEAR=2025
+     docker run --rm -p 3030:3030 fuseki:mesh-2025 --name fuseki-test
 
 ### Debug
 
-     docker-compose -f docker-compose.yml run --rm -it fuseki sh
+     docker exec -it fuseki-test sh
