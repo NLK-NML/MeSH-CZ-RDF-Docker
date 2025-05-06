@@ -39,7 +39,7 @@ When the Docker Desktop is running you can use the following commands.
 
      docker-compose up
 
-Press CTRL+C to stop
+> Press CTRL+C to stop
 
 ### Run the container as service
 
