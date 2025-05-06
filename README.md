@@ -33,7 +33,8 @@ When the Docker Desktop is running you can use the following commands.
 
 ### Re-build the image
 
-     docker build -t fuseki:meshcz . --no-cache --build-arg MESH_YEAR=2026
+     docker build -t fuseki:meshcz . --no-cache
+	 docker build -t fuseki:meshcz . --no-cache --build-arg MESH_YEAR=2026
 
 ### Run the container - debug
 
