@@ -2,9 +2,19 @@
 
 > Work in progress ... Feedback is kindly welcomed.
 
-This quide deploys [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/index.html) server in a standalone container.
+This quide deploys [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/index.html) server in a standalone Docker container.
+
+For production deployment is necessary:
+- setup a proxy for the query endpoint and
+- setup authorization for the Admin GUI using the proxy or
+- setup [Fuseki Authentication](https://jena.apache.org/documentation/fuseki2/fuseki-data-access-control.html#authentication)
 
 ## Prerequisites
+
+The useki:meshcz Docker image requires 8GB of RAM - if it is not possible to allocate modify in the Dockerfile:
+
+     ENV JAVA_OPTIONS="-Xms8G -Xmx8G"
+     ENV JVM_ARGS="-Xmx8G"
 
 Install the following tools if not available on your system.
 
