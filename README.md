@@ -2,7 +2,7 @@
 
 > Work in progress ...
 
-This quide deployes [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/index.html) server as a standalone container.
+This quide deploys [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/index.html) server as a standalone container.
 
 ## Prerequisites
 
