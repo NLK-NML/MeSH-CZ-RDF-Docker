@@ -52,6 +52,6 @@ RUN tdb2.tdbloader  \
 EXPOSE 3030
 
 # Run Fuseki using the baked configuration
-#CMD ["sh", "-c", "fuseki-server", "--loc=databases/meshcz", "--config=configuration/meshcz.ttl", "--ping"]
-CMD ["sh", "-c", "exec java $JVM_ARGS --add-modules jdk.incubator.vector -jar $FUSEKI_HOME/fuseki-server.jar --loc=databases/meshcz --config=configuration/meshcz.ttl"]
+#CMD ["sh", "-c", "fuseki-server", "--config=configuration/meshcz.ttl", "--ping"]
+CMD ["sh", "-c", "exec java $JVM_ARGS --add-modules jdk.incubator.vector -jar $FUSEKI_HOME/fuseki-server.jar --config=configuration/meshcz.ttl"]
 
