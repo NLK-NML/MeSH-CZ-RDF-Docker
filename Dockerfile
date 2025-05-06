@@ -7,6 +7,8 @@ FROM openjdk:21-slim
 ARG MESH_YEAR=2025
 ENV MESH_YEAR=${MESH_YEAR}
 
+ENV JVM_ARGS="-Xmx8G"
+
 # Install dependencies
 RUN apt-get update && \
     apt-get install -y curl unzip && \
@@ -38,19 +40,19 @@ RUN curl -L -o jena.zip https://downloads.apache.org/jena/binaries/${JENA_HOME}.
 RUN curl -L -o _imports/meshcz.nq.gz "https://github.com/NLK-NML/MeSH-CZ-RDF/releases/download/${MESH_YEAR}/meshcz.nq.gz" && \
     curl -L -o configuration/meshcz.ttl "https://raw.githubusercontent.com/NLK-NML/MeSH-CZ-RDF/refs/heads/main/${MESH_YEAR}/meshcz.ttl"
 
-# Load RDF into TDB2
+# Load RDF into Fuseki and Index the database
 RUN tdb2.tdbloader  \
-    --loc=databases/meshcz _imports/meshcz.nq.gz
-
-# && \ rm _imports/meshcz.nq.gz
-
-# Index the database
-RUN java --add-modules jdk.incubator.vector \
+    --loc=databases/meshcz _imports/meshcz.nq.gz && \
+    java --add-modules jdk.incubator.vector \
     -cp ${FUSEKI_HOME}/fuseki-server.jar jena.textindexer \
     --desc=configuration/meshcz.ttl
+
+# && \ rm _imports/meshcz.nq.gz
 
 # Expose the Fuseki port
 EXPOSE 3030
 
 # Run Fuseki using the baked configuration
-CMD ["sh", "-c", "fuseki-server"]
+CMD ["sh", "-c", "fuseki-server", "--config=configuration/meshcz.ttl"]
+#CMD ["sh", "-c", "exec java $JVM_ARGS -jar ${FUSEKI_HOME}/fuseki-server.jar --config=configuration/meshcz.ttl"]
+
