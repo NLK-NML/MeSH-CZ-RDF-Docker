@@ -24,7 +24,7 @@
     skosmos:sparqlCollationEnabled false ;
     skosmos:sparqlTimeout 20 ;
     skosmos:httpTimeout 5 ;
-    skosmos:serviceName "Skosmos" ;
+    skosmos:serviceName "MeSH-CZ Skosmos" ;
     skosmos:uiLanguageDropdown true ;
     skosmos:uiHoneypotEnabled true ;
     skosmos:uiHoneypotTime 5 ;
@@ -32,18 +32,17 @@
     skosmos:logBrowserConsole false ;
     skosmos:templateCache "/tmp/skosmos-template-cache" ;
     skosmos:customCss "resource/css/stylesheet.css" ;
-    skosmos:feedbackAddress "" ;
-    skosmos:feedbackSender "" ;
+    skosmos:feedbackAddress "medvik@nlk.cz" ;
+    skosmos:feedbackSender "MeSH-CZ Skosmos" ;
     skosmos:feedbackEnvelopeSender "" ;
     skosmos:globalPlugins () ;
     skosmos:languages (
-        [ rdfs:label "cs" ; rdf:value "cs_CZ.utf8" ]
+        #[ rdfs:label "cs" ; rdf:value "cs_CZ.utf8" ]
         [ rdfs:label "en" ; rdf:value "en_GB.utf8" ]
         [ rdfs:label "es" ; rdf:value "es_ES.utf8" ]
         [ rdfs:label "fi" ; rdf:value "fi_FI.utf8" ]
         [ rdfs:label "fr" ; rdf:value "fr_FR.utf8" ]
         [ rdfs:label "it" ; rdf:value "it_IT.utf8" ]
-        [ rdfs:label "pl" ; rdf:value "pl_PL.utf8" ]
     ) .
 
 # -----------------------------
@@ -55,7 +54,7 @@
     skosmos:shortName "MeSH-CZ SKOS" ;
     void:uriSpace "http://mesh.medvik.cz/" ;
     skosmos:language "cs", "en" ;
-    skosmos:defaultLanguage "cs" ;
+    skosmos:defaultLanguage "en" ;
     skosmos:showTopConcepts true ;
     skosmos:fullAlphabeticalIndex true ;
     skosmos:groupClass isothes:ConceptGroup ;
