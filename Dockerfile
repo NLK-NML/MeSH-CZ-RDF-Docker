@@ -4,7 +4,7 @@
 
 FROM openjdk:21-slim
 
-ARG MESH_YEAR=2025
+ARG MESH_YEAR=2026
 ENV MESH_YEAR=${MESH_YEAR}
 
 # Install dependencies
