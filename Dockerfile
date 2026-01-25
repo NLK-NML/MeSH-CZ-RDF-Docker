@@ -1,4 +1,4 @@
-# Updated:  2025-05-06
+# Updated:  2026-01-25
 # syntax=docker/dockerfile:1
 # Build image with: docker build -t fuseki:meshcz .
 
@@ -13,7 +13,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Jena and Fuseki versions
-ENV JENA_VERSION=5.4.0
+ENV JENA_VERSION=5.6.0
 ENV JENA_HOME=apache-jena-${JENA_VERSION}
 ENV FUSEKI_HOME=apache-jena-fuseki-${JENA_VERSION}
 ENV FUSEKI_BASE=/fuseki
@@ -37,8 +37,8 @@ RUN curl -L -o jena.zip https://downloads.apache.org/jena/binaries/${JENA_HOME}.
     unzip jena.zip && unzip fuseki.zip && rm jena.zip fuseki.zip
 
 # Download RDF data and TTL config
-RUN curl -L -o _imports/meshcz.nq.gz "https://github.com/NLK-NML/MeSH-CZ-RDF/releases/download/${MESH_YEAR}/meshcz.nq.gz" && \
-    curl -L -o configuration/meshcz.ttl "https://raw.githubusercontent.com/NLK-NML/MeSH-CZ-RDF/refs/heads/main/${MESH_YEAR}/meshcz.ttl"
+RUN curl -L -o _imports/meshcz.nq.gz "https://github.com/NLK-NML/MeSH-CZ-RDF/releases/download/${MESH_YEAR}/MeSH-CZ_{MESH_YEAR}.ttl.gz" && \ 
+    curl -L -o configuration/meshcz.ttl "https://raw.githubusercontent.com/NLK-NML/MeSH-CZ-RDF/refs/heads/main/mesh-cz/${MESH_YEAR}/meshcz-jena-config.ttl" 
 
 # Load RDF into Fuseki and Index the database
 RUN tdb2.tdbloader  \
