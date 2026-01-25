@@ -1,9 +1,24 @@
-# Updated:  2025-05-06
+# Updated:   2026-01-25
 
 services:
   fuseki:
-    image: fuseki:meshcz
-    container_name: fuseki-meshcz
+    image: meshcz-fuseki
+    container_name: meshcz-fuseki
     ports:
       - "3030:3030"
-    command: ["sh", "-c", "fuseki-server", "--ping"]
+    networks:
+      - meshnet
+
+  skosmos:
+    image: meshcz-skosmos
+    container_name: meshcz-skosmos
+    ports:
+      - "8080:80"
+    depends_on:
+      - fuseki
+    networks:
+      - meshnet
+
+networks:
+  meshnet:
+    driver: bridge

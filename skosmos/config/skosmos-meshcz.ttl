@@ -1,0 +1,64 @@
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix wv: <http://vocab.org/waiver/terms/norms> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosmos: <http://purl.org/net/skosmos#> .
+@prefix isothes: <http://purl.org/iso25964/skos-thes#> .
+@prefix mdrtype: <http://publications.europa.eu/resource/authority/dataset-type/> .
+@prefix : <#> .
+
+# -----------------------------
+# Skosmos main configuration
+# -----------------------------
+
+:config a skosmos:Configuration ;
+    # SPARQL endpoint (Fuseki container)
+    skosmos:sparqlEndpoint <http://fuseki:3030/skosmos/sparql> ;
+    skosmos:sparqlDialect "JenaText" ;
+    skosmos:sparqlCollationEnabled false ;
+    skosmos:sparqlTimeout 20 ;
+    skosmos:httpTimeout 5 ;
+    skosmos:serviceName "Skosmos" ;
+    skosmos:uiLanguageDropdown true ;
+    skosmos:uiHoneypotEnabled true ;
+    skosmos:uiHoneypotTime 5 ;
+    skosmos:logCaughtExceptions false ;
+    skosmos:logBrowserConsole false ;
+    skosmos:templateCache "/tmp/skosmos-template-cache" ;
+    skosmos:customCss "resource/css/stylesheet.css" ;
+    skosmos:feedbackAddress "" ;
+    skosmos:feedbackSender "" ;
+    skosmos:feedbackEnvelopeSender "" ;
+    skosmos:globalPlugins () ;
+    skosmos:languages (
+        [ rdfs:label "cs" ; rdf:value "cs_CZ.utf8" ]
+        [ rdfs:label "en" ; rdf:value "en_GB.utf8" ]
+        [ rdfs:label "es" ; rdf:value "es_ES.utf8" ]
+        [ rdfs:label "fi" ; rdf:value "fi_FI.utf8" ]
+        [ rdfs:label "fr" ; rdf:value "fr_FR.utf8" ]
+        [ rdfs:label "it" ; rdf:value "it_IT.utf8" ]
+        [ rdfs:label "pl" ; rdf:value "pl_PL.utf8" ]
+    ) .
+
+# -----------------------------
+# MeSH-CZ SKOS Vocabulary
+# -----------------------------
+
+:meshcz_skos a skosmos:Vocabulary, void:Dataset ;
+    dc:title "MeSH-CZ SKOS"@en ;
+    skosmos:shortName "MeSH-CZ SKOS" ;
+    void:uriSpace "http://mesh.medvik.cz/" ;
+    skosmos:language "cs", "en" ;
+    skosmos:defaultLanguage "cs" ;
+    skosmos:showTopConcepts true ;
+    skosmos:fullAlphabeticalIndex true ;
+    skosmos:groupClass isothes:ConceptGroup ;
+    void:sparqlEndpoint <http://fuseki:3030/skosmos/sparql> ;
+    skosmos:sparqlGraph <http://mesh.medvik.cz/> .
+

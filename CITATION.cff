@@ -3,8 +3,8 @@ message: "Please cite this software using these metadata."
 authors:
 - name: "National Medical Library (Czech Republic)"
   url: "https://nlk.cz"
-title: "MeSH-CZ-RDF-Docker - Publish MeSH-CZ RDF dataset using SPARQL server"
-date-released: 2025-05-06
+title: "MeSH-CZ-RDF-Docker - Publish MeSH-CZ RDF/SKOS datasets using SPARQL server"
+date-released: 2026-01-25
 license: "MIT"
 repository-code: "https://github.com/NLK-NML/MeSH-CZ-RDF-Docker"
 url: "https://github.com/NLK-NML/MeSH-CZ-RDF-Docker/wiki"

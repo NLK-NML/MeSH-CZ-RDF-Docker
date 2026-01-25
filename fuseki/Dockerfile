@@ -1,6 +1,6 @@
-# Updated:  2026-01-25
-# syntax=docker/dockerfile:1
-# Build image with: docker build -t fuseki:meshcz .
+# Updated:   2026-01-25
+# Build the image with:
+# docker build -t meshcz-fuseki ./fuseki
 
 FROM debian:stable-slim
 
@@ -29,9 +29,7 @@ ENV FUSEKI_HOME=apache-jena-fuseki
 ENV FUSEKI_BASE=/fuseki
 ENV PATH="${JENA_HOME}/bin:${FUSEKI_HOME}:${PATH}"
 ENV JAVA_OPTIONS="-Xms8G -Xmx8G"
-ENV JVM_ARGS="-Xmx8G" \
-    --add-modules jdk.incubator.vector \
-    --enable-native-access=ALL-UNNAMED"
+ENV JVM_ARGS="--add-modules jdk.incubator.vector --enable-native-access=ALL-UNNAMED"
 
 # Create directory structure
 RUN mkdir -p ${FUSEKI_BASE}/databases/meshcz \
@@ -40,6 +38,9 @@ RUN mkdir -p ${FUSEKI_BASE}/databases/meshcz \
              ${FUSEKI_BASE}/configuration
 
 RUN chmod -R 777 ${FUSEKI_BASE}
+
+COPY config/meshcz.ttl ${FUSEKI_BASE}/configuration/meshcz.ttl
+COPY config/skosmos.ttl ${FUSEKI_BASE}/configuration/skosmos.ttl
 
 WORKDIR ${FUSEKI_BASE}
 
@@ -53,8 +54,7 @@ RUN curl -L -o jena.zip https://downloads.apache.org/jena/binaries/apache-jena-$
 
 # Download the data and Fuseki configs
 # MeSH-CZ RDF
-RUN curl -fL -o _imports/meshcz.ttl.gz "https://github.com/NLK-NML/MeSH-CZ-RDF/releases/download/${MESH_YEAR}/MeSH-CZ_${MESH_YEAR}.ttl.gz" && \
-    curl -fL -o configuration/meshcz.ttl "https://raw.githubusercontent.com/NLK-NML/MeSH-CZ-RDF-Docker/main/config/meshcz.ttl"
+RUN curl -fL -o _imports/meshcz.ttl.gz "https://github.com/NLK-NML/MeSH-CZ-RDF/releases/download/${MESH_YEAR}/MeSH-CZ_${MESH_YEAR}.ttl.gz"
 
 # Load the data into Fuseki and create indices
 # MeSH-CZ RDF
@@ -63,8 +63,7 @@ RUN tdb2.tdbloader --loc=databases/meshcz _imports/meshcz.ttl.gz && \
     rm _imports/meshcz.ttl.gz
 
 # MeSH-CZ SKOS
-RUN curl -fL -o _imports/meshcz-skos.ttl.gz "https://github.com/NLK-NML/MeSH-CZ-RDF/releases/download/${MESH_YEAR}/MeSH-CZ_${MESH_YEAR}_SKOS.ttl.gz" && \
-    curl -fL -o configuration/skosmos.ttl "https://raw.githubusercontent.com/NLK-NML/MeSH-CZ-RDF-Docker/main/config/skosmos.ttl"
+RUN curl -fL -o _imports/meshcz-skos.ttl.gz "https://github.com/NLK-NML/MeSH-CZ-RDF/releases/download/${MESH_YEAR}/MeSH-CZ_${MESH_YEAR}_SKOS.ttl.gz"
 
 # MeSH-CZ SKOS
 RUN tdb2.tdbloader --graph=http://mesh.medvik.cz/ --loc=databases/skosmos _imports/meshcz-skos.ttl.gz && \
@@ -77,4 +76,3 @@ EXPOSE 3030
 # Run Fuseki using the baked configuration
 #CMD ["sh", "-c", "fuseki-server", "--config=configuration/meshcz.ttl", "--ping"]
 CMD ["sh", "-c", "exec java $JVM_ARGS -jar $FUSEKI_HOME/fuseki-server.jar"]
-
