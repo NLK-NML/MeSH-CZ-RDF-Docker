@@ -1,4 +1,4 @@
-# Updated:   2026-01-25
+# Updated:   2026-01-26
 # Build the image with:
 # docker build -t meshcz-fuseki ./fuseki
 
@@ -39,9 +39,6 @@ RUN mkdir -p ${FUSEKI_BASE}/databases/meshcz \
 
 RUN chmod -R 777 ${FUSEKI_BASE}
 
-COPY config/meshcz.ttl ${FUSEKI_BASE}/configuration/meshcz.ttl
-COPY config/skosmos.ttl ${FUSEKI_BASE}/configuration/skosmos.ttl
-
 WORKDIR ${FUSEKI_BASE}
 
 # Download and extract Jena + Fuseki
@@ -53,6 +50,10 @@ RUN curl -L -o jena.zip https://downloads.apache.org/jena/binaries/apache-jena-$
     rm jena.zip fuseki.zip
 
 # Download the data and Fuseki configs
+
+COPY config/meshcz.ttl configuration/meshcz.ttl
+COPY config/skosmos.ttl configuration/skosmos.ttl
+
 # MeSH-CZ RDF
 RUN curl -fL -o _imports/meshcz.ttl.gz "https://github.com/NLK-NML/MeSH-CZ-RDF/releases/download/${MESH_YEAR}/MeSH-CZ_${MESH_YEAR}.ttl.gz"
 
@@ -74,5 +75,4 @@ RUN tdb2.tdbloader --graph=http://mesh.medvik.cz/ --loc=databases/skosmos _impor
 EXPOSE 3030
 
 # Run Fuseki using the baked configuration
-#CMD ["sh", "-c", "fuseki-server", "--config=configuration/meshcz.ttl", "--ping"]
 CMD ["sh", "-c", "exec java $JVM_ARGS -jar $FUSEKI_HOME/fuseki-server.jar"]

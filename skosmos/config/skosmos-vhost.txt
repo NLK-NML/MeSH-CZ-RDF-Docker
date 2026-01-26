@@ -1,3 +1,5 @@
+ServerName test.medvik.cz
+
 <VirtualHost *:80>
     ServerName test.medvik.cz
     ServerAdmin medvik@nlk.cz
