@@ -19,8 +19,8 @@
 
 :config a skosmos:Configuration ;
     # SPARQL endpoint (Fuseki container)
-	skosmos:baseHref "https://test.medvik.cz/skosmos/" ;
-    skosmos:sparqlEndpoint <https://test.medvik.cz/sparql> ;
+    skosmos:sparqlEndpoint <http://fuseki:3030/skosmos/sparql> ;
+    #skosmos:baseHref "https://test.medvik.cz/skosmos/" ;
     skosmos:sparqlDialect "JenaText" ;
     skosmos:sparqlCollationEnabled false ;
     skosmos:sparqlTimeout 20 ;
@@ -51,18 +51,17 @@
 # -----------------------------
 
 :meshcz a skosmos:Vocabulary, void:Dataset ;
-    dc:title "Medical Subject Headings - CZ"@en ;
+    dc:title "Medical Subject Headings CZ"@en ;
     skosmos:shortName "MeSH-CZ" ;
     void:uriSpace "http://mesh.medvik.cz/" ;
     skosmos:language "cs", "en" ;
     skosmos:defaultLanguage "en" ;
-    skosmos:fallbackLanguages "en";
+    skosmos:fallbackLanguages "en" ;
     skosmos:showTopConcepts true ;
     skosmos:fullAlphabeticalIndex true ;
     skosmos:defaultSidebarView "hierarchy" ;
     #skosmos:groupClass skos:Collection ;
-    #skosmos:showNotation false ;
-    skosmos:hasMultiLingualProperty "skos:prefLabel", "skos:altLabel" ;
-    void:sparqlEndpoint <https://test.medvik.cz/sparql/meshcz> ;
+    skosmos:showNotation false ;
+    #skosmos:hasMultiLingualProperty skos:prefLabel, skos:altLabel, skos:scopeNote ;
     skosmos:sparqlGraph <http://mesh.medvik.cz/> .
 

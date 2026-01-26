@@ -32,7 +32,7 @@ ENV JAVA_OPTIONS="-Xms8G -Xmx8G"
 ENV JVM_ARGS="--add-modules jdk.incubator.vector --enable-native-access=ALL-UNNAMED"
 
 # Create directory structure
-RUN mkdir -p ${FUSEKI_BASE}/databases/meshcz \
+RUN mkdir -p ${FUSEKI_BASE}/databases \
              ${FUSEKI_BASE}/indexes \
              ${FUSEKI_BASE}/_imports \
              ${FUSEKI_BASE}/configuration
