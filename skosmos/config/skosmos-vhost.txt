@@ -1,5 +1,5 @@
 <VirtualHost *:80>
-    ServerName mesh.medvik.cz
+    ServerName test.medvik.cz
     ServerAdmin medvik@nlk.cz
     DocumentRoot /var/www/html
     #LogLevel info ssl:warn
