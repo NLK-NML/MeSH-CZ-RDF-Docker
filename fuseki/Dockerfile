@@ -1,4 +1,4 @@
-# Updated:   2026-01-26
+# Updated:   2026-01-27
 # Build the image with:
 # docker build -t meshcz-fuseki ./fuseki
 
@@ -32,11 +32,11 @@ ENV JAVA_OPTIONS="-Xms8G -Xmx8G"
 ENV JVM_ARGS="--add-modules jdk.incubator.vector --enable-native-access=ALL-UNNAMED"
 
 # Create directory structure
-RUN mkdir -p ${FUSEKI_BASE}/databases \
-             ${FUSEKI_BASE}/indexes \
-             ${FUSEKI_BASE}/_imports \
-             ${FUSEKI_BASE}/configuration
-
+RUN mkdir -p ${FUSEKI_BASE}/configuration \
+             ${FUSEKI_BASE}/databases \
+             ${FUSEKI_BASE}/imports \
+             ${FUSEKI_BASE}/indexes
+             
 RUN chmod -R 777 ${FUSEKI_BASE}
 
 WORKDIR ${FUSEKI_BASE}
@@ -55,21 +55,21 @@ COPY config/meshcz.ttl configuration/meshcz.ttl
 COPY config/skosmos.ttl configuration/skosmos.ttl
 
 # MeSH-CZ RDF
-RUN curl -fL -o _imports/meshcz.ttl.gz "https://github.com/NLK-NML/MeSH-CZ-RDF/releases/download/${MESH_YEAR}/MeSH-CZ_${MESH_YEAR}.ttl.gz"
+RUN curl -fL -o imports/meshcz.ttl.gz "https://github.com/NLK-NML/MeSH-CZ-RDF/raw/refs/heads/main/meshcz/${MESH_YEAR}/meshcz.ttl.gz" 
 
 # Load the data into Fuseki and create indices
 # MeSH-CZ RDF
-RUN tdb2.tdbloader --loc=databases/meshcz _imports/meshcz.ttl.gz && \
+RUN tdb2.tdbloader --loc=databases/meshcz imports/meshcz.ttl.gz && \
     java --add-modules jdk.incubator.vector -cp ${FUSEKI_HOME}/fuseki-server.jar jena.textindexer --desc=configuration/meshcz.ttl && \
-    rm _imports/meshcz.ttl.gz
+    rm imports/meshcz.ttl.gz
 
 # MeSH-CZ SKOS
-RUN curl -fL -o _imports/meshcz-skos.ttl.gz "https://github.com/NLK-NML/MeSH-CZ-RDF/releases/download/${MESH_YEAR}/MeSH-CZ_${MESH_YEAR}_SKOS.ttl.gz"
+RUN curl -fL -o imports/meshcz-skos.ttl.gz "https://github.com/NLK-NML/MeSH-CZ-RDF/raw/refs/heads/main/meshcz/${MESH_YEAR}/SKOS/meshcz-skos.ttl.gz" 
 
 # MeSH-CZ SKOS
-RUN tdb2.tdbloader --graph=http://mesh.medvik.cz/ --loc=databases/skosmos _imports/meshcz-skos.ttl.gz && \
+RUN tdb2.tdbloader --graph=http://mesh.medvik.cz/ --loc=databases/skosmos imports/meshcz-skos.ttl.gz && \
     java --add-modules jdk.incubator.vector -cp ${FUSEKI_HOME}/fuseki-server.jar jena.textindexer --desc=configuration/skosmos.ttl && \
-    rm _imports/meshcz-skos.ttl.gz
+    rm imports/meshcz-skos.ttl.gz
 
 # Expose the Fuseki port
 EXPOSE 3030
