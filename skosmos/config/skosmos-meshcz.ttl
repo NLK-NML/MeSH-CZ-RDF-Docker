@@ -21,8 +21,8 @@
 
 :config a skosmos:Configuration ;
     # SPARQL endpoint (Fuseki container)
-    skosmos:sparqlEndpoint <http://fuseki:3030/skosmos/sparql> ;
-    #skosmos:sparqlEndpoint <http://host.docker.internal:3030/skosmos> ;
+    #skosmos:sparqlEndpoint <http://fuseki:3030/skosmos/sparql> ;
+    skosmos:sparqlEndpoint <http://host.docker.internal:3030/skosmos> ;
     #skosmos:baseHref "https://test.medvik.cz/skosmos/" ;
     skosmos:sparqlDialect "JenaText" ;
     skosmos:sparqlCollationEnabled false ;
@@ -64,8 +64,9 @@
     skosmos:fullAlphabeticalIndex true ;
     skosmos:defaultSidebarView "hierarchy" ;
     #skosmos:groupClass skos:Collection ;
-    skosmos:showNotation false ;
-    #skosmos:mainConceptScheme mesh: ;
+    skosmos:showNotation true ;
+    skosmos:sortByNotation true ;
+    skosmos:mainConceptScheme mesh: ;
     #skosmos:conceptSchemesInHierarchy true ;
     #skosmos:hasMultiLingualProperty skos:prefLabel, skos:altLabel, skos:scopeNote ;
     skosmos:sparqlGraph <http://mesh.medvik.cz/> .
