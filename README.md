@@ -9,4 +9,6 @@ This repo installs standalone Docker containers to deploy:
 
 See the [Wiki](https://github.com/NLK-NML/MeSH-CZ-RDF-Docker/wiki) for all the details.
 
+MeSH-CZ RDF datasets are available here: https://github.com/NLK-NML/MeSH-CZ-RDF/tree/main/meshcz
+
 > Work in progress ... Feedback is kindly welcomed - please use the [Issues](https://github.com/NLK-NML/MeSH-CZ-RDF-Docker/issues)
