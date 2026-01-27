@@ -11,6 +11,8 @@
 @prefix skosmos: <http://purl.org/net/skosmos#> .
 @prefix isothes: <http://purl.org/iso25964/skos-thes#> .
 @prefix mdrtype: <http://publications.europa.eu/resource/authority/dataset-type/> .
+@prefix mesh:   <http://id.nlm.nih.gov/mesh/> .
+@prefix meshcz: <http://mesh.medvik.cz/meshcz/> .
 @prefix : <#> .
 
 # -----------------------------
@@ -20,6 +22,7 @@
 :config a skosmos:Configuration ;
     # SPARQL endpoint (Fuseki container)
     skosmos:sparqlEndpoint <http://fuseki:3030/skosmos/sparql> ;
+    #skosmos:sparqlEndpoint <http://host.docker.internal:3030/skosmos> ;
     #skosmos:baseHref "https://test.medvik.cz/skosmos/" ;
     skosmos:sparqlDialect "JenaText" ;
     skosmos:sparqlCollationEnabled false ;
@@ -62,6 +65,8 @@
     skosmos:defaultSidebarView "hierarchy" ;
     #skosmos:groupClass skos:Collection ;
     skosmos:showNotation false ;
+    #skosmos:mainConceptScheme mesh: ;
+    #skosmos:conceptSchemesInHierarchy true ;
     #skosmos:hasMultiLingualProperty skos:prefLabel, skos:altLabel, skos:scopeNote ;
     skosmos:sparqlGraph <http://mesh.medvik.cz/> .
 

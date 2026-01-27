@@ -52,7 +52,7 @@ text:TextIndexES    rdfs:subClassOf   text:TextIndex .
            )
        ] ;
     ## text:queryAnalyzer [ a text:KeywordAnalyzer ] ;
-	### Deprecated:
+    ### Deprecated:
     # text:queryParser text:AnalyzingQueryParser ;
     ## text:defineAnalyzers [ . . . ] ;
     text:multilingualSupport true ;

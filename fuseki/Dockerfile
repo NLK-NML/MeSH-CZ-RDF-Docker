@@ -60,7 +60,7 @@ RUN curl -fL -o _imports/meshcz.ttl.gz "https://github.com/NLK-NML/MeSH-CZ-RDF/r
 # Load the data into Fuseki and create indices
 # MeSH-CZ RDF
 RUN tdb2.tdbloader --loc=databases/meshcz _imports/meshcz.ttl.gz && \
-    java -cp ${FUSEKI_HOME}/fuseki-server.jar jena.textindexer --desc=configuration/meshcz.ttl && \
+    java --add-modules jdk.incubator.vector -cp ${FUSEKI_HOME}/fuseki-server.jar jena.textindexer --desc=configuration/meshcz.ttl && \
     rm _imports/meshcz.ttl.gz
 
 # MeSH-CZ SKOS
@@ -68,7 +68,7 @@ RUN curl -fL -o _imports/meshcz-skos.ttl.gz "https://github.com/NLK-NML/MeSH-CZ-
 
 # MeSH-CZ SKOS
 RUN tdb2.tdbloader --graph=http://mesh.medvik.cz/ --loc=databases/skosmos _imports/meshcz-skos.ttl.gz && \
-    java -cp ${FUSEKI_HOME}/fuseki-server.jar jena.textindexer --desc=configuration/skosmos.ttl && \
+    java --add-modules jdk.incubator.vector -cp ${FUSEKI_HOME}/fuseki-server.jar jena.textindexer --desc=configuration/skosmos.ttl && \
     rm _imports/meshcz-skos.ttl.gz
 
 # Expose the Fuseki port
