@@ -59,7 +59,7 @@
     dc:title "Medical Subject Headings CZ"@en ;
     skosmos:shortName "MeSH-CZ" ;
     void:uriSpace "http://mesh.medvik.cz/" ;
-    void:dataDump <https://github.com/NLK-NML/MeSH-CZ-RDF/blob/main/meshcz/2026/SKOS/meshcz.ttl.gz> ;
+    void:dataDump <https://github.com/NLK-NML/MeSH-CZ-RDF/raw/refs/heads/main/meshcz/2026/SKOS/meshcz-skos.ttl.gz> ;
     skosmos:language "cs", "en" ;
     skosmos:defaultLanguage "en" ;
     skosmos:fallbackLanguages "en" ;
@@ -76,7 +76,7 @@
     # skosmos:hasMultiLingualProperty skos:scopeNote ;
     skosmos:sparqlGraph <http://mesh.medvik.cz/> .
 
-<https://github.com/NLK-NML/MeSH-CZ-RDF/blob/main/meshcz/2026/SKOS/meshcz.ttl.gz>
+<https://github.com/NLK-NML/MeSH-CZ-RDF/raw/refs/heads/main/meshcz/2026/SKOS/meshcz-skos.ttl.gz>
     dc:format "text/turtle" ;
     dc:language "en" .
 
