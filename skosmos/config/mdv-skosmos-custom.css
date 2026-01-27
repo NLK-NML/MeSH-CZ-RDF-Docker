@@ -1,0 +1,26 @@
+/* CSS Document */
+
+#groups {
+  display: none;
+}
+
+#changes {
+  display: none;
+}
+
+#concept-notation {
+  display: none;
+}
+
+span.property-value-notation {
+  display: none;
+}
+
+div.prop-mapping-vocab {
+  display: none;
+}
+
+span.concept-notation {
+  margin-right: 0.5em;
+}
+

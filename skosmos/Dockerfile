@@ -50,6 +50,8 @@ RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
 # ---- Copy custom configuration ----
 COPY config/skosmos-meshcz.ttl /var/www/html/config.ttl
 
+COPY config/mdv-skosmos-custom.css /var/www/html/resource/css/xxx-mdv-skosmos-custom.css
+
 COPY config/skosmos-vhost.txt /etc/apache2/sites-available/000-default.conf
 
 # ---- Expose Apache ----

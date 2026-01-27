@@ -24,7 +24,8 @@
     # SPARQL endpoint (Fuseki container)
     skosmos:sparqlEndpoint <http://fuseki:3030/skosmos/sparql> ;
     # skosmos:sparqlEndpoint <http://host.docker.internal:3030/skosmos> ;
-    # skosmos:baseHref "https://test.medvik.cz/skosmos/" ;
+    skosmos:baseHref "https://test.medvik.cz/skosmos/" ;
+    skosmos:customCss "resource/css/xxx-mdv-skosmos-custom.css" ;
     skosmos:sparqlDialect "JenaText" ;
     skosmos:sparqlCollationEnabled true ;
     skosmos:sparqlTimeout 20 ;
@@ -41,7 +42,6 @@
     skosmos:feedbackSender "Medvik-Skosmos" ;
     skosmos:feedbackEnvelopeSender "" ;
     skosmos:globalPlugins () ;
-    skosmos:uiLanguageDropdown true ;
     skosmos:languages (
         # [ rdfs:label "cs" ; rdf:value "cs_CZ.utf8" ]
         [ rdfs:label "en" ; rdf:value "en_GB.utf8" ]
@@ -68,6 +68,7 @@
     skosmos:defaultSidebarView "hierarchy" ;
     # skosmos:groupClass skos:Collection ;
     skosmos:showNotation true ;
+    skosmos:showStatistics false ;
     skosmos:searchByNotation true ;
     skosmos:sortByNotation true ;
     # skosmos:marcSourceCode "cze"@cs, "eng"@en ;
