@@ -1,0 +1,31 @@
+# Qleverfile for MeSH-CZ as SKOS, use with https://github.com/ad-freiburg/qlever-control
+#
+# qlever get-data  # downloads .gz file
+# qlever index     #
+# qlever start     # starts the server (instant)
+
+[data]
+NAME              = meshczskos
+BASE_URL          = https://github.com/NLK-NML/MeSH-CZ-RDF
+GET_DATA_CMD      = curl -fL -o meshczskos.ttl.gz https://github.com/NLK-NML/MeSH-CZ-RDF/raw/refs/heads/main/meshcz/2026/SKOS/meshcz-skos.ttl.gz
+DESCRIPTION       = MeSH-CZ as SKOS
+TEXT_DESCRIPTION  = TBD
+
+[index]
+INPUT_FILES     = meshczskos.ttl.gz
+CAT_INPUT_FILES = zcat ${INPUT_FILES}
+# TEXT_INDEX      = from_literals
+
+[server]
+PORT               = 8088
+MEMORY_FOR_QUERIES = 2G
+CACHE_MAX_SIZE     = 1G
+TIMEOUT            = 30s
+
+[runtime]
+SYSTEM = docker
+IMAGE  = docker.io/adfreiburg/qlever:latest
+
+[ui]
+#UI_CONFIG = meshczskos
+UI_PORT = 8080

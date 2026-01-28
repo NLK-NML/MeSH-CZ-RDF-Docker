@@ -1,0 +1,31 @@
+# Qleverfile for MeSH-CZ RDF use with https://github.com/ad-freiburg/qlever-control
+#
+# qlever get-data  # downloads .gz file
+# qlever index     #
+# qlever start     # starts the server (instant)
+
+[data]
+NAME              = meshcz
+BASE_URL          = https://github.com/NLK-NML/MeSH-CZ-RDF
+GET_DATA_CMD      = curl -fL -o meshcz.ttl.gz https://github.com/NLK-NML/MeSH-CZ-RDF/raw/refs/heads/main/meshcz/2026/meshcz.ttl.gz
+DESCRIPTION       = MeSH-CZ
+TEXT_DESCRIPTION  = TBD
+
+[index]
+INPUT_FILES     = meshcz.ttl.gz
+CAT_INPUT_FILES = zcat ${INPUT_FILES}
+# TEXT_INDEX      = from_literals
+
+[server]
+PORT               = 7077
+MEMORY_FOR_QUERIES = 2G
+CACHE_MAX_SIZE     = 1G
+TIMEOUT            = 30s
+
+[runtime]
+SYSTEM = docker
+IMAGE  = docker.io/adfreiburg/qlever:latest
+
+[ui]
+#UI_CONFIG = meshcz
+UI_PORT = 7070

@@ -1,0 +1,31 @@
+# Updated:   2026-01-28
+# Run:  docker-compose -f docker-qlever-server.yaml up
+
+services:
+
+  meshczskos-server:
+    image: adfreiburg/qlever
+    container_name: qlever-server-meshczskos
+    working_dir: /data/meshczskos
+    environment:
+      - DATASET_NAME=meshczskos
+    # - REFRESH_DATA=1
+    # - REFRESH_INDEX=1
+    volumes:
+      - ./data:/data
+      - ./entrypoints/meshcz-data.sh:/meshcz-data.sh
+    ports:
+      - "8088:8088"
+    entrypoint: ["/bin/bash", "/meshcz-data.sh"]
+    command: >
+      qlever start
+      --name meshczskos
+      --log-level WARNING
+      --run-in-foreground
+      --access-token CHANGEME123
+      --system native
+      --kill-existing-with-same-port
+      --persist-updates
+
+    # --use-text-index yes
+
