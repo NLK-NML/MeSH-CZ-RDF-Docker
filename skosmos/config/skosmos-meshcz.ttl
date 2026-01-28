@@ -17,14 +17,14 @@
 
 # -----------------------------
 # Skosmos v3 main configuration
-# Version: 1.0.1 2026-01-27
+# Version: 1.0.1 2026-01-28
 # -----------------------------
 
 :config a skosmos:Configuration ;
     # SPARQL endpoint (Fuseki container)
     skosmos:sparqlEndpoint <http://fuseki:3030/skosmos/sparql> ;
-    # skosmos:sparqlEndpoint <http://host.docker.internal:3030/skosmos> ;
-    # You must setup a proxy when enabled:
+    #skosmos:sparqlEndpoint <http://host.docker.internal:3030/skosmos> ;
+    ## You must setup a proxy when enabled:
     #skosmos:baseHref "https://test.medvik.cz/skosmos/" ;
     skosmos:customCss "resource/css/xxx-mdv-skosmos-custom.css" ;
     skosmos:sparqlDialect "JenaText" ;
@@ -68,12 +68,12 @@
     skosmos:fullAlphabeticalIndex true ;
     skosmos:defaultSidebarView "hierarchy" ;
     # skosmos:groupClass skos:Collection ;
+    skosmos:showDeprecated true ;
     skosmos:showNotation true ;
     skosmos:showStatistics false ;
     skosmos:searchByNotation true ;
     skosmos:sortByNotation true ;
     # skosmos:marcSourceCode "cze"@cs, "eng"@en ;
-    #skosmos:mainConceptScheme meshcz:scheme ;
     #skosmos:conceptSchemesInHierarchy true ;
     # skosmos:hasMultiLingualProperty skos:scopeNote ;
     skosmos:sparqlGraph <http://mesh.medvik.cz/> .

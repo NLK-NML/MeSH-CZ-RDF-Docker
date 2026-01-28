@@ -1,0 +1,9 @@
+# Updated:   2026-01-25
+# Run:  docker-compose -f docker-skosmos.yaml up
+
+services:
+  skosmos:
+    image: meshcz-skosmos
+    container_name: meshcz-skosmos
+    ports:
+      - "8080:80"

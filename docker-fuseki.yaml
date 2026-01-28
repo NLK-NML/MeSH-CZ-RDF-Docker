@@ -1,0 +1,9 @@
+# Updated:   2026-01-25
+# Run:  docker-compose -f docker-fuseki.yaml up
+
+services:
+  fuseki:
+    image: meshcz-fuseki
+    container_name: meshcz-fuseki
+    ports:
+      - "3030:3030"
