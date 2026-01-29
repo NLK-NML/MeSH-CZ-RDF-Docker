@@ -1,5 +1,5 @@
 # Updated:   2026-01-25
-# Build the image with:
+# Build the image:
 # docker build -t meshcz-skosmos ./skosmos
 
 FROM debian:stable-slim
