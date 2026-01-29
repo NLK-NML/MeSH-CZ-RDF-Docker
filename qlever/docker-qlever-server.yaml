@@ -10,7 +10,7 @@ services:
     environment:
       - DATASET_NAME=meshczskos
     # - REFRESH_DATA=1
-    # - REFRESH_INDEX=1
+    # - REFRESH_STORE=1
     volumes:
       - ./data:/data
       - ./entrypoints/meshcz-data.sh:/meshcz-data.sh
