@@ -24,7 +24,7 @@ fi
 # Check if the QLever index file exists
 INDEX_FILE="${DATASET_NAME}.index.spo"
 
-if [ ! -f "$INDEX_FILE" ] || [ "${REFRESH_INDEX:-0}" = "1" ]; then
+if [ ! -f "$INDEX_FILE" ] || [ "${REFRESH_STORE:-0}" = "1" ]; then
   echo "Building index in $DATASET_PATH ..."
   qlever index --system native --overwrite-existing --log-level WARNING
   # --text-index from_literals
