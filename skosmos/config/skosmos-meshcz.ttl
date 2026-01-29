@@ -21,7 +21,7 @@
 # -----------------------------
 
 :config a skosmos:Configuration ;
-    # SPARQL endpoint (Fuseki container)
+    # SPARQL endpoint
     skosmos:sparqlEndpoint <http://fuseki:3030/skosmos/sparql> ;
     #skosmos:sparqlEndpoint <http://host.docker.internal:3030/skosmos> ;
     ## You must setup a proxy when enabled:
