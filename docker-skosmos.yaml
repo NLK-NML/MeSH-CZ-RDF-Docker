@@ -1,5 +1,6 @@
 # Updated:   2026-01-25
-# Run:  docker-compose -f docker-skosmos.yaml up
+# Run:
+# docker-compose -f docker-skosmos.yaml up
 
 services:
   skosmos:
