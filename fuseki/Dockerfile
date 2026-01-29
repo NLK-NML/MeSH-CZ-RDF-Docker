@@ -28,7 +28,7 @@ ENV JENA_HOME=apache-jena
 ENV FUSEKI_HOME=apache-jena-fuseki
 ENV FUSEKI_BASE=/fuseki
 ENV PATH="${JENA_HOME}/bin:${FUSEKI_HOME}:${PATH}"
-ENV JAVA_OPTIONS="-Xms8G -Xmx8G"
+ENV JAVA_OPTIONS="-Xms4G -Xmx4G"
 ENV JVM_ARGS="--add-modules jdk.incubator.vector --enable-native-access=ALL-UNNAMED"
 
 # Create directory structure
@@ -75,4 +75,8 @@ RUN tdb2.tdbloader --graph=http://mesh.medvik.cz/ --loc=databases/skosmos import
 EXPOSE 3030
 
 # Run Fuseki using the baked configuration
-CMD ["sh", "-c", "exec java $JVM_ARGS -jar $FUSEKI_HOME/fuseki-server.jar"]
+CMD ["java",
+     "--add-modules", "jdk.incubator.vector",
+     "--enable-native-access=ALL-UNNAMED",
+     "-jar",
+     "/apache-jena-fuseki/fuseki-server.jar"]
