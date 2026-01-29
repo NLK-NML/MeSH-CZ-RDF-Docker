@@ -1,0 +1,31 @@
+# Updated:   2026-01-29
+# Run:  docker-compose -f docker-fuseki-slim-TBD.yaml up
+# Build: docker build -t meshcz-fuseki-slim ./fuseki
+
+services:
+  fuseki:
+    image: meshcz-fuseki-slim
+    container_name: meshcz-fuseki-slim
+    dockerfile: Dockerfile_slim
+    environment:
+      - FUSEKI_HOME=/jena-fuseki
+      - FUSEKI_BASE=/fuseki/data
+      - MESH_YEAR=2026
+      - DATASETS=meshcz-skos|skosmos
+    # - DATASETS=meshcz|meshcz;meshcz-skos|skosmos
+    # - REFRESH_DATA=1
+    # - REFRESH_STORE=1
+    volumes:
+      - ./fuseki/data:/fuseki/data
+      - ./fuseki/entrypoints/meshcz-data-loading.sh:/fuseki/meshcz-data-loading.sh
+    ports:
+      - "3030:3030"
+    entrypoint: ["/fuseki/meshcz-data-loading.sh"]
+    command: ["java",
+              "-Xms4G",
+              "-Xmx4G",
+              "--add-modules=jdk.incubator.vector",
+              "--enable-native-access=ALL-UNNAMED",
+              "-jar",
+              "$FUSEKI_HOME/fuseki-server.jar"]
+
