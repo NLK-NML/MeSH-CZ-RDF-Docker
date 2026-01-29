@@ -4,6 +4,8 @@
 services:
 
   meshczskos-ui:
+    build:
+      context: ./qlever
     image: adfreiburg/qlever-ui
     container_name: qlever-ui-meshczskos
     working_dir: /data/meshczskos

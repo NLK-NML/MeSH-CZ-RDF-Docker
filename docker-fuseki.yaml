@@ -5,14 +5,17 @@
 # docker-compose -f docker-fuseki.yaml up fuseki
 
 services:
+
   fuseki-staging:
     build:
       context: ./fuseki
-    image: meshcz-fuseki-staging
-    container_name: meshcz-fuseki-staging
+    image: fuseki-staging-meshcz
+    container_name: fuseki-staging-meshcz
     environment:
       - MESH_YEAR=2026
       - DATASETS=meshcz-skos|skosmos;meshcz|meshcz
+      # - REFRESH_DATA=1
+      # - REFRESH_STORE=1
       - FUSEKI_HOME=/apache-jena-fuseki
       - FUSEKI_BASE=/jena-data
       - HOST_IN=/host-data
@@ -21,7 +24,7 @@ services:
       - ./fuseki/config:/jena-data/configuration:ro
       - ./fuseki/data:/host-data:ro
       - ./fuseki/data:/host-data-out
-    entrypoint: ["/meshcz-data-loading.sh"]
+    entrypoint: ["/bin/bash", "/meshcz-data-loading.sh"]
     profiles: ["staging"]
     # no command needed; entrypoint does all work
 
@@ -29,15 +32,14 @@ services:
   fuseki:
     build:
       context: ./fuseki
-    image: meshcz-fuseki
-    container_name: meshcz-fuseki
+    image: fuseki-server-meshcz
+    container_name: fuseki-server-meshcz
     environment:
       - FUSEKI_HOME=/apache-jena-fuseki
       - FUSEKI_BASE=/jena-data
     volumes:
       - ./fuseki/config:/jena-data/configuration
       - ./fuseki/data:/jena-data
-
     ports:
       - "3030:3030"
     command: ["java",

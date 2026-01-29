@@ -1,0 +1,50 @@
+# Updated:   2026-01-29
+# 1. Build:
+# docker-compose -f docker-qlever-server.yaml --profile staging up --build
+# 2. Run:
+# docker-compose -f docker-qlever-server.yaml up qlever-server
+
+services:
+
+  qlever-staging:
+    build:
+      context: ./qlever
+    image: adfreiburg/qlever
+    container_name: qlever-staging-meshcz
+    environment:
+      - MESH_YEAR=2026
+      - DATASETS=meshcz-skos
+      #- DATASETS=meshcz-skos;meshcz
+      - HOST_IN=/host-data
+      - HOST_OUT=/host-data-out
+    volumes:
+      - ./qlever/data:/host-data:ro
+      - ./qlever/data:/host-data-out
+      - ./entrypoints/meshcz-data.sh:/meshcz-data.sh
+    entrypoint: ["/bin/bash", "/meshcz-data.sh"]
+    profiles: ["staging"]
+
+
+  qlever-server:
+    build:
+      context: ./qlever
+    image: adfreiburg/qlever
+    container_name: qlever-server-meshcz-skos
+    environment:
+      - DATASET=meshczskos
+    volumes:
+      - ./qlever/data:/host-data:ro
+      - ./qlever/data:/host-data-out
+    ports:
+      - "8088:8088"
+    command: >
+      qlever start
+      --name meshczskos
+      --log-level WARNING
+      --run-in-foreground
+      --access-token CHANGEME123
+      --system native
+      --kill-existing-with-same-port
+      --persist-updates
+
+    # --use-text-index yes
