@@ -1,9 +1,14 @@
 # Updated:   2026-01-25
-# Run:
+# 1. Build and run:
+# docker-compose -f docker-skosmos.yaml up --build
+# 2. Run:
 # docker-compose -f docker-skosmos.yaml up
+
 
 services:
   skosmos:
+    build:
+      context: ./skosmos
     image: meshcz-skosmos
     container_name: meshcz-skosmos
     ports:

@@ -1,51 +1,79 @@
-# Updated:   2026-01-29
+# Updated:   2026-01-30
 # 1. Build:
-# docker-compose -f docker-fuseki.yaml --profile staging up --build
+# - on a Windows host:
+# docker compose --file docker-fuseki.yaml --profile staging-winhost up --build
+# - on a linux host:
+# docker compose --file docker-fuseki.yaml --profile staging up --build
 # 2. Run:
-# docker-compose -f docker-fuseki.yaml up fuseki
+# docker compose --file docker-fuseki.yaml --profile server up fuseki
+
 
 services:
 
-  fuseki-staging:
+  fuseki-build:
+    image: fuseki-meshcz
     build:
       context: ./fuseki
-    image: fuseki-staging-meshcz
+    profiles: [staging, staging-winhost, server]
+
+
+  fuseki-staging:
+    image: fuseki-meshcz
+    depends_on: [fuseki-build]
     container_name: fuseki-staging-meshcz
     environment:
-      - MESH_YEAR=2026
-      - DATASETS=meshcz-skos|skosmos;meshcz|meshcz
-      # - REFRESH_DATA=1
-      # - REFRESH_STORE=1
-      - FUSEKI_HOME=/apache-jena-fuseki
-      - FUSEKI_BASE=/jena-data
-      - HOST_IN=/host-data
-      - HOST_OUT=/host-data-out
+      HOST_PLATFORM: LINUX
+      MESH_YEAR: 2026
+      DATASETS: meshcz-skos|skosmos
+      FUSEKI_HOME: /apache-jena-fuseki
+      FUSEKI_BASE: /jena-data
+      HOST_IN: /host-data
+      HOST_OUT: /host-data-out
+    volumes:
+      - ./fuseki/config:/jena-data/configuration:ro
+      - ./fuseki/data:/jena-data
+    entrypoint: ["/bin/bash", "/meshcz-data-loading.sh"]
+    profiles: [staging]
+
+
+  fuseki-staging-winhost:
+    image: fuseki-meshcz
+    depends_on: [fuseki-build]
+    container_name: fuseki-staging-winhost-meshcz
+    environment:
+      HOST_PLATFORM: WINDOWS
+      MESH_YEAR: 2026
+      DATASETS: meshcz-skos|skosmos
+      FUSEKI_HOME: /apache-jena-fuseki
+      FUSEKI_BASE: /jena-data
+      HOST_IN: /host-data
+      HOST_OUT: /host-data-out
     volumes:
       - ./fuseki/config:/jena-data/configuration:ro
       - ./fuseki/data:/host-data:ro
       - ./fuseki/data:/host-data-out
     entrypoint: ["/bin/bash", "/meshcz-data-loading.sh"]
-    profiles: ["staging"]
-    # no command needed; entrypoint does all work
+    profiles: [staging-winhost]
 
 
   fuseki:
-    build:
-      context: ./fuseki
-    image: fuseki-server-meshcz
+    image: fuseki-meshcz
+    depends_on: [fuseki-build]
     container_name: fuseki-server-meshcz
     environment:
-      - FUSEKI_HOME=/apache-jena-fuseki
-      - FUSEKI_BASE=/jena-data
+      FUSEKI_HOME: /apache-jena-fuseki
+      FUSEKI_BASE: /jena-data
     volumes:
       - ./fuseki/config:/jena-data/configuration
       - ./fuseki/data:/jena-data
     ports:
       - "3030:3030"
-    command: ["java",
-              "-Xms4G",
-              "-Xmx4G",
-              "--add-modules=jdk.incubator.vector",
-              "--enable-native-access=ALL-UNNAMED",
-              "-jar",
-              "/apache-jena-fuseki/fuseki-server.jar"]
+    command:
+      - java
+      - -Xms4G
+      - -Xmx4G
+      - --add-modules=jdk.incubator.vector
+      - --enable-native-access=ALL-UNNAMED
+      - -jar
+      - /apache-jena-fuseki/fuseki-server.jar
+    profiles: [server]
