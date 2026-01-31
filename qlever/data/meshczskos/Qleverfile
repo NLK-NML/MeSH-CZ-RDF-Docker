@@ -14,7 +14,7 @@ TEXT_DESCRIPTION  = TBD
 [index]
 INPUT_FILES     = meshczskos.ttl.gz
 CAT_INPUT_FILES = zcat ${INPUT_FILES}
-# TEXT_INDEX      = from_literals
+TEXT_INDEX      = from_literals
 
 [server]
 PORT               = 8088

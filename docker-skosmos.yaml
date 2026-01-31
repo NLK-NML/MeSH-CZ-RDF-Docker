@@ -9,7 +9,8 @@ services:
   skosmos:
     build:
       context: ./skosmos
-    image: meshcz-skosmos
-    container_name: meshcz-skosmos
+      dockerfile: Dockerfile.Debian
+    image: skosmos-meshcz
+    container_name: skosmos-meshcz
     ports:
       - "8080:80"

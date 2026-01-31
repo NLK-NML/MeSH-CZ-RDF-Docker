@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+set -o pipefail
 
 # ----------------------------
 # Environment validation
@@ -11,6 +12,16 @@ fi
 
 if [ -z "$DATASETS" ]; then
   echo "ERROR: DATASETS environment variable is not set"
+  exit 1
+fi
+
+if [ -z "$FUSEKI_BASE" ]; then
+  echo "ERROR: FUSEKI_BASE environment variable is not set"
+  exit 1
+fi
+
+if [ -z "$FUSEKI_HOME" ]; then
+  echo "ERROR: FUSEKI_HOME environment variable is not set"
   exit 1
 fi
 
@@ -35,19 +46,19 @@ if [ "${HOST_PLATFORM}" = "WINDOWS" ]; then
 
     # Databases
     if [ -d "${HOST_IN}/databases/${dbn}" ]; then
-      echo "Copying database '${dbn}' from host..."
+      echo "Copying database $dbn from host..."
       rsync -a --info=progress2 "${HOST_IN}/databases/${dbn}/" "${FUSEKI_BASE}/databases/${dbn}/"
     fi
 
     # Indexes
     if [ -d "${HOST_IN}/indexes/${dbn}" ]; then
-      echo "Copying indexes '${dbn}' from host..."
+      echo "Copying indexes $dbn from host..."
       rsync -a --info=progress2 "${HOST_IN}/indexes/${dbn}/" "${FUSEKI_BASE}/indexes/${dbn}/"
     fi
 
     # Imports
     if [ -f "${HOST_IN}/imports/${src}.ttl.gz" ]; then
-      echo "Copying dataset '${src}.ttl.gz' from host..."
+      echo "Copying dataset $src.ttl.gz from host..."
       rsync -a --info=progress2 "${HOST_IN}/imports/${src}.ttl.gz" "${FUSEKI_BASE}/imports/"
     fi
   done
@@ -84,7 +95,7 @@ for ds in "${datasets[@]}"; do
       rm -rf "$IND_PATH"
   fi
 
-  DB_FILE=${DB_PATH}/nodes.dat
+  DB_FILE=${DB_PATH}/tdb.lock
 
   if [ ! -f "$DB_FILE" ] || [ "${REFRESH_STORE:-0}" = "1" ] || [ "${DATASET_NEW}" = "1" ]; then
     if [ "${src}" = "meshcz-skos" ] && [ "${dbn}" = "skosmos" ]; then
@@ -108,7 +119,7 @@ done
 # ---------------------------------------
 if [ "${HOST_PLATFORM}" = "WINDOWS" ]; then
   if [ -d "$HOST_OUT" ]; then
-    echo "Persisting databases, indexes, and imports back to host..."
+    echo "Persisting Jena Fuseki data back to host..."
     rsync -a --info=progress2 "$FUSEKI_BASE/databases/" "$HOST_OUT/databases/"
     rsync -a --info=progress2 "$FUSEKI_BASE/indexes/" "$HOST_OUT/indexes/"
     rsync -a --info=progress2 "$FUSEKI_BASE/imports/" "$HOST_OUT/imports/"

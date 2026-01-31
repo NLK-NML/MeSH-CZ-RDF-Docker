@@ -1,44 +1,78 @@
-# Updated:   2026-01-29
+# Updated:   2026-01-30
 # 1. Build:
-# docker-compose -f docker-qlever-server.yaml --profile staging up --build
+# - on a Windows host:
+# docker compose --file docker-qlever-server.yaml --profile staging-winhost up --build
+# - on a linux host:
+# docker compose --file docker-qlever-server.yaml --profile staging up --build
 # 2. Run:
-# docker-compose -f docker-qlever-server.yaml up qlever-server
+# docker compose --file docker-qlever-server.yaml --profile server up --force-recreate --remove-orphans
+
 
 services:
 
-  qlever-staging:
+  qlever-build:
+    image: qlever-build-meshcz
     build:
       context: ./qlever
-    image: adfreiburg/qlever
+    entrypoint: ["/bin/bash", "-c", "echo 'Building image only'"]
+    profiles: [staging, staging-winhost, server]
+
+
+  qlever-staging:
+    image: qlever-build-meshcz
+    depends_on: [qlever-build]
     container_name: qlever-staging-meshcz
     environment:
-      - MESH_YEAR=2026
-      - DATASETS=meshcz-skos
-      #- DATASETS=meshcz-skos;meshcz
-      - HOST_IN=/host-data
-      - HOST_OUT=/host-data-out
+      HOST_PLATFORM: WINDOWS
+      DATASETS: meshczskos;meshcz
+      #REFRESH_DATA: 1
+      #REFRESH_STORE: 1
+      QLEVER_BASE: /qlever/qlever-data
     volumes:
+      - ./qlever/entrypoints:/qlever-scripts
+      - ./qlever/config:/qlever-config
+      - ./qlever/data:/qlever-data
+    entrypoint: ["/bin/bash", "/qlever-scripts/meshcz-data.sh"]
+    profiles: [staging]
+
+
+  qlever-staging-winhost:
+    image: qlever-build-meshcz
+    depends_on: [qlever-build]
+    container_name: qlever-staging-winhost-meshcz
+    environment:
+      HOST_PLATFORM: WINDOWS
+      #DATASETS: meshczskos
+      DATASETS: meshczskos;meshcz
+      #REFRESH_DATA: 1
+      #REFRESH_STORE: 1
+      QLEVER_BASE: /qlever/qlever-data
+      HOST_IN: /host-data
+      HOST_OUT: /host-data-out
+    volumes:
+      - ./qlever/entrypoints:/qlever-scripts
+      - ./qlever/config:/qlever-config
       - ./qlever/data:/host-data:ro
       - ./qlever/data:/host-data-out
-      - ./entrypoints/meshcz-data.sh:/meshcz-data.sh
-    entrypoint: ["/bin/bash", "/meshcz-data.sh"]
-    profiles: ["staging"]
+      #- ./qlever/data:/qlever-data
+    entrypoint: ["/bin/bash", "/qlever-scripts/meshcz-data.sh"]
+    profiles: [staging-winhost]
 
 
-  qlever-server:
-    build:
-      context: ./qlever
-    image: adfreiburg/qlever
+  qlever-server-meshcz-skos:
+    image: qlever-build-meshcz
+    depends_on: [qlever-build]
     container_name: qlever-server-meshcz-skos
     environment:
-      - DATASET=meshczskos
+      DATASET: meshczskos
     volumes:
-      - ./qlever/data:/host-data:ro
-      - ./qlever/data:/host-data-out
+      - ./qlever/data/meshczskos:/qlever/qlever-data/meshczskos
+    working_dir: /qlever/qlever-data/meshczskos
+    entrypoint: ["qlever"]
     ports:
       - "8088:8088"
     command: >
-      qlever start
+      start
       --name meshczskos
       --log-level WARNING
       --run-in-foreground
@@ -46,5 +80,30 @@ services:
       --system native
       --kill-existing-with-same-port
       --persist-updates
+      --use-text-index yes
+    profiles: [server]
 
-    # --use-text-index yes
+
+  qlever-server-meshcz-rdf:
+    image: qlever-build-meshcz
+    depends_on: [qlever-build]
+    container_name: qlever-server-meshcz-rdf
+    environment:
+      DATASET: meshcz
+    volumes:
+      - ./qlever/data/meshcz:/qlever/qlever-data/meshcz
+    working_dir: /qlever/qlever-data/meshcz
+    entrypoint: ["qlever"]
+    ports:
+      - "7077:7077"
+    command: >
+      start
+      --name meshcz
+      --log-level WARNING
+      --run-in-foreground
+      --access-token CHANGEME123
+      --system native
+      --kill-existing-with-same-port
+      --persist-updates
+      --use-text-index yes
+    profiles: [server]

@@ -24,15 +24,16 @@ services:
     environment:
       HOST_PLATFORM: LINUX
       MESH_YEAR: 2026
-      DATASETS: meshcz-skos|skosmos
+      DATASETS: meshcz-skos|skosmos;meshcz|meshcz
+      #REFRESH_DATA: 1
+      #REFRESH_STORE: 1
       FUSEKI_HOME: /apache-jena-fuseki
       FUSEKI_BASE: /jena-data
-      HOST_IN: /host-data
-      HOST_OUT: /host-data-out
     volumes:
+      - ./fuseki/entrypoints:/fuseki-scripts
       - ./fuseki/config:/jena-data/configuration:ro
       - ./fuseki/data:/jena-data
-    entrypoint: ["/bin/bash", "/meshcz-data-loading.sh"]
+    entrypoint: ["/bin/bash", "/fuseki-scripts/meshcz-data-loading.sh"]
     profiles: [staging]
 
 
@@ -43,16 +44,19 @@ services:
     environment:
       HOST_PLATFORM: WINDOWS
       MESH_YEAR: 2026
-      DATASETS: meshcz-skos|skosmos
+      DATASETS: meshcz-skos|skosmos;meshcz|meshcz
+      #REFRESH_DATA: 1
+      #REFRESH_STORE: 1
       FUSEKI_HOME: /apache-jena-fuseki
       FUSEKI_BASE: /jena-data
       HOST_IN: /host-data
       HOST_OUT: /host-data-out
     volumes:
+      - ./fuseki/entrypoints:/fuseki-scripts
       - ./fuseki/config:/jena-data/configuration:ro
       - ./fuseki/data:/host-data:ro
       - ./fuseki/data:/host-data-out
-    entrypoint: ["/bin/bash", "/meshcz-data-loading.sh"]
+    entrypoint: ["/bin/bash", "/fuseki-scripts/meshcz-data-loading.sh"]
     profiles: [staging-winhost]
 
 
@@ -76,4 +80,7 @@ services:
       - --enable-native-access=ALL-UNNAMED
       - -jar
       - /apache-jena-fuseki/fuseki-server.jar
+      - --ping
+      - --stats
+      - --compact
     profiles: [server]

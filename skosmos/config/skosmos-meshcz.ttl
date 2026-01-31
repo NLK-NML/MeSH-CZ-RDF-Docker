@@ -22,8 +22,8 @@
 
 :config a skosmos:Configuration ;
     # SPARQL endpoint
-    skosmos:sparqlEndpoint <http://fuseki:3030/skosmos/sparql> ;
-    #skosmos:sparqlEndpoint <http://host.docker.internal:3030/skosmos> ;
+    #skosmos:sparqlEndpoint <http://fuseki:3030/skosmos/sparql> ;
+    skosmos:sparqlEndpoint <http://host.docker.internal:3030/skosmos> ;
     ## You must setup a proxy when enabled:
     #skosmos:baseHref "https://test.medvik.cz/skosmos/" ;
     skosmos:customCss "resource/css/xxx-mdv-skosmos-custom.css" ;
