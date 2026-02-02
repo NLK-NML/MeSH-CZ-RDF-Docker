@@ -1,6 +1,6 @@
-# Updated:   2026-01-25
+# Updated:   2026-02-02
 # Build image:
-# docker build -t meshcz-skosmos ./skosmos
+# docker build -t skosmos-meshcz ./skosmos
 
 FROM debian:stable-slim
 
@@ -12,7 +12,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apache2 \
     curl \
     ca-certificates \
-    git \
     locales \
     php8.4 \
     libapache2-mod-php8.4 \
@@ -34,8 +33,23 @@ RUN a2enmod rewrite headers expires
 # ---- Composer / PHP dependencies ----
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
-# ---- Download Skosmos release ----
+WORKDIR /tmp
+
+#ENV SKOSMOS_ZIP=https://github.com/NatLibFi/Skosmos/archive/refs/tags/v3.0.zip
+#ENV SKOSMOS_ZIP=https://github.com/NatLibFi/Skosmos/archive/refs/heads/main.zip
+
+# ---- Download & unpack Skosmos (release or main) into /skosmos ----
+#RUN curl -sL ${SKOSMOS_ZIP} -o skosmos.zip \
+# && unzip skosmos.zip \
+# && mkdir -p /var/www/html \
+# && rm -rf /var/www/html/* \
+# && TOPDIR=$(ls -d Skosmos-* | head -n 1) \
+# && cp -a "$TOPDIR"/. /var/www/html/ \
+# && rm -rf "$TOPDIR" skosmos.zip /tmp/*
+
 WORKDIR /var/www/html
+
+# ---- Download Skosmos release ----
 RUN curl -sL https://github.com/NatLibFi/Skosmos/archive/refs/tags/v3.0.tar.gz | tar xz --strip-components=1
 
 # Node / frontend dependencies
@@ -49,9 +63,7 @@ RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
 
 # ---- Copy custom configuration ----
 COPY config/skosmos-meshcz.ttl /var/www/html/config.ttl
-
-COPY config/mdv-skosmos-custom.css /var/www/html/resource/css/xxx-mdv-skosmos-custom.css
-
+COPY config/mdv-skosmos-custom.css /var/www/html/resource/css/mdv-skosmos-custom.css
 COPY config/skosmos-vhost.txt /etc/apache2/sites-available/000-default.conf
 
 # ---- Expose Apache ----

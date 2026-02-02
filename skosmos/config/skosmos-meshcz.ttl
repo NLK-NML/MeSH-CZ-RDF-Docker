@@ -22,11 +22,12 @@
 
 :config a skosmos:Configuration ;
     # SPARQL endpoint
+    #skosmos:sparqlEndpoint <http://localhost:3030/#/> ;
     skosmos:sparqlEndpoint <http://host.docker.internal:3030/skosmos> ;
-    #skosmos:sparqlEndpoint <http://rog-fk:8088/default/sparql> ;    
+    #skosmos:sparqlEndpoint <http://rog-fk:8088/default/sparql> ;
     ## You must setup a proxy when enabled:
     #skosmos:baseHref "https://test.medvik.cz/skosmos/" ;
-    skosmos:customCss "resource/css/xxx-mdv-skosmos-custom.css" ;
+    #skosmos:customCss "resource/css/mdv-skosmos-custom.css" ;
     skosmos:sparqlDialect "JenaText" ;
     skosmos:sparqlCollationEnabled true ;
     skosmos:sparqlTimeout 20 ;
@@ -67,14 +68,13 @@
     skosmos:showTopConcepts true ;
     skosmos:fullAlphabeticalIndex true ;
     skosmos:defaultSidebarView "hierarchy" ;
-    # skosmos:groupClass skos:Collection ;
     skosmos:showDeprecated true ;
+    #skosmos:showNotation false ;
     skosmos:showNotation true ;
     skosmos:showStatistics false ;
     skosmos:searchByNotation true ;
     skosmos:sortByNotation true ;
     # skosmos:marcSourceCode "cze"@cs, "eng"@en ;
-    #skosmos:conceptSchemesInHierarchy true ;
     # skosmos:hasMultiLingualProperty skos:scopeNote ;
     skosmos:sparqlGraph <http://mesh.medvik.cz/> .
 
