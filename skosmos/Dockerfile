@@ -1,4 +1,4 @@
-# Updated:   2026-02-02
+# Updated:   2026-02-03
 # Build image:
 # docker build -t skosmos-meshcz ./skosmos
 
@@ -7,11 +7,15 @@ FROM debian:stable-slim
 ARG DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8
 
+ENV SKOSMOS_GIT=https://github.com/NatLibFi/Skosmos.git
+ENV SKOSMOS_BRANCH=main
+
 # ---- System dependencies ----
 RUN apt-get update && apt-get install -y --no-install-recommends \
     apache2 \
     curl \
     ca-certificates \
+    git \
     locales \
     php8.4 \
     libapache2-mod-php8.4 \
@@ -24,8 +28,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     php8.4-apcu \
     nodejs \
     npm \
-    unzip \
- && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
 # ---- Get Apache modules ----
 RUN a2enmod rewrite headers expires
@@ -33,24 +36,15 @@ RUN a2enmod rewrite headers expires
 # ---- Composer / PHP dependencies ----
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
-WORKDIR /tmp
+# ---- Clone Skosmos branch ----
+RUN git clone -b ${SKOSMOS_BRANCH} ${SKOSMOS_GIT}
 
-#ENV SKOSMOS_ZIP=https://github.com/NatLibFi/Skosmos/archive/refs/tags/v3.0.zip
-#ENV SKOSMOS_ZIP=https://github.com/NatLibFi/Skosmos/archive/refs/heads/main.zip
-
-# ---- Download & unpack Skosmos (release or main) into /skosmos ----
-#RUN curl -sL ${SKOSMOS_ZIP} -o skosmos.zip \
-# && unzip skosmos.zip \
-# && mkdir -p /var/www/html \
-# && rm -rf /var/www/html/* \
-# && TOPDIR=$(ls -d Skosmos-* | head -n 1) \
-# && cp -a "$TOPDIR"/. /var/www/html/ \
-# && rm -rf "$TOPDIR" skosmos.zip /tmp/*
+RUN cp -a Skosmos/. /var/www/html/
 
 WORKDIR /var/www/html
 
 # ---- Download Skosmos release ----
-RUN curl -sL https://github.com/NatLibFi/Skosmos/archive/refs/tags/v3.0.tar.gz | tar xz --strip-components=1
+# RUN curl -sL https://github.com/NatLibFi/Skosmos/archive/refs/tags/v3.0.tar.gz | tar xz --strip-components=1
 
 # Node / frontend dependencies
 RUN npm install --omit=dev
