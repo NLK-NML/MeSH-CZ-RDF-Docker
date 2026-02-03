@@ -1,29 +1,32 @@
 # Updated:   2026-02-03
 # 1. Build:
-# docker-compose -f docker-qlever-ui.yaml up --build
+# docker-compose -f docker-qlever-ui.yaml --profile staging up --build
 # 2. Run:
-# docker-compose -f docker-qlever-ui.yaml up
+# docker-compose -f docker-qlever-ui.yaml --profile server up
 
 services:
 
-  meshczskos-ui:
-    build:
-      context: ./qlever
-    image: adfreiburg/qlever-ui
-    container_name: qlever-ui-meshczskos
-    working_dir: /qlever/qlever-data/meshczskos
-    entrypoint: ["qlever"]
+  qleverui-bootstrap:
+    image: adfreiburg/qlever-ui:latest
+    container_name: qleverui-bootstrap
+    working_dir: /app
     volumes:
-      - ./qlever/data/meshczskos:/qlever/qlever-data/meshczskos
-    ports:
-      - "8080:8080"
+      - ./qleverui/data/db:/app/db
+    # Create and update the /qleverui/.env file !
+    env_file: /qleverui/.env  # Loads credentials from a separate file
+    entrypoint: /bin/bash -c
     command: >
-      ui
-      --name meshczskos
-      --port 8088
-      --ui-port 8080
-      --ui-system docker
-      --ui-config-file QLeverfile-ui.yml
-      --log-level WARNING
+      "python manage.py migrate &&
+       python manage.py createsuperuser --noinput || true"
+    profiles: ["staging"]
 
-    #--host-name test.medvik.cz
+
+  qleverui-server:
+    image: adfreiburg/qlever-ui:latest
+    container_name: qleverui
+    working_dir: /app
+    volumes:
+      - ./qleverui/data/db:/app/db
+    ports:
+      - "7000:7000"
+    profiles: ["server"]
