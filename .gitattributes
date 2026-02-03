@@ -2,6 +2,7 @@
 * text=auto
 
 *.sh    text eol=lf
+.env*   text eol=lf
 
 # Custom for Visual Studio
 *.cs    diff=csharp
