@@ -1,5 +1,8 @@
-# Updated:   2026-01-28
-# Run:  docker-compose -f docker-qlever-ui.yaml up
+# Updated:   2026-02-03
+# 1. Build:
+# docker-compose -f docker-qlever-ui.yaml up --build
+# 2. Run:
+# docker-compose -f docker-qlever-ui.yaml up
 
 services:
 
@@ -8,13 +11,14 @@ services:
       context: ./qlever
     image: adfreiburg/qlever-ui
     container_name: qlever-ui-meshczskos
-    working_dir: /data/meshczskos
+    working_dir: /qlever/qlever-data/meshczskos
+    entrypoint: ["qlever"]
     volumes:
-      - ./data:/data
+      - ./qlever/data/meshczskos:/qlever/qlever-data/meshczskos
     ports:
       - "8080:8080"
     command: >
-      qlever ui
+      ui
       --name meshczskos
       --port 8088
       --ui-port 8080
@@ -22,4 +26,4 @@ services:
       --ui-config-file QLeverfile-ui.yml
       --log-level WARNING
 
-      #--host-name test.medvik.cz
+    #--host-name test.medvik.cz

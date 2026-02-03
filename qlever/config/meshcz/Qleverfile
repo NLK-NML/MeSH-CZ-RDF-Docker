@@ -28,4 +28,4 @@ IMAGE  = docker.io/adfreiburg/qlever:latest
 
 [ui]
 #UI_CONFIG = meshcz
-UI_PORT = 7070
+UI_PORT = 7090

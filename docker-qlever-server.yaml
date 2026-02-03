@@ -1,4 +1,4 @@
-# Updated:   2026-01-30
+# Updated:   2026-02-03
 # 1. Build:
 # - on a Windows host:
 # docker compose --file docker-qlever-server.yaml --profile staging-winhost up --build
@@ -15,7 +15,7 @@ services:
     build:
       context: ./qlever
     entrypoint: ["/bin/bash", "-c", "echo 'Building image only'"]
-    profiles: [staging, staging-winhost, server]
+    profiles: [staging, staging-winhost, server, gui]
 
 
   qlever-staging:
@@ -42,7 +42,6 @@ services:
     container_name: qlever-staging-winhost-meshcz
     environment:
       HOST_PLATFORM: WINDOWS
-      #DATASETS: meshczskos
       DATASETS: meshczskos;meshcz
       #REFRESH_DATA: 1
       #REFRESH_STORE: 1
@@ -107,3 +106,24 @@ services:
       --persist-updates
       --use-text-index yes
     profiles: [server]
+
+  # This is not working yet
+  meshczskos-ui:
+    image: qlever-build-meshcz
+    depends_on: [qlever-build]
+    container_name: qlever-ui-meshczskos
+    working_dir: /qlever/qlever-data/meshczskos
+    entrypoint: ["qlever"]
+    volumes:
+      - ./qlever/data/meshczskos:/qlever/qlever-data/meshczskos
+    ports:
+      - "8080:8080"
+    command: >
+      ui
+      --name meshczskos
+      --port 8088
+      --ui-port 8080
+      --ui-system docker
+      --ui-config-file QLeverfile-ui.yml
+      --log-level WARNING
+    profiles: [gui]
