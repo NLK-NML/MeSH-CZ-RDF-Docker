@@ -9,11 +9,11 @@ services:
   qleverui-bootstrap:
     image: adfreiburg/qlever-ui:latest
     container_name: qleverui-bootstrap
-    working_dir: /app
     volumes:
       - ./qleverui/data/db:/app/db
     # Create and update the /qleverui/.env file !
     env_file: ./qleverui/.env  # Loads credentials from a separate file
+    working_dir: /app
     entrypoint: /bin/bash -c
     command: >
       "python manage.py migrate &&
@@ -24,9 +24,9 @@ services:
   qleverui-server:
     image: adfreiburg/qlever-ui:latest
     container_name: qleverui
-    working_dir: /app
     volumes:
       - ./qleverui/data/db:/app/db
+    working_dir: /app
     ports:
       - "7000:7000"
     profiles: ["server"]
