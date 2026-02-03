@@ -13,7 +13,7 @@ services:
     volumes:
       - ./qleverui/data/db:/app/db
     # Create and update the /qleverui/.env file !
-    env_file: /qleverui/.env  # Loads credentials from a separate file
+    env_file: ./qleverui/.env  # Loads credentials from a separate file
     entrypoint: /bin/bash -c
     command: >
       "python manage.py migrate &&
