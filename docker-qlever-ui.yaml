@@ -10,9 +10,9 @@ services:
     image: adfreiburg/qlever-ui:latest
     container_name: qleverui-bootstrap
     volumes:
-      - ./qleverui/data/db:/app/db
+      - ./qleverui/data:/app/db
     # Create and update the /qleverui/.env file !
-    env_file: ./qleverui/.env  # Loads credentials from a separate file
+    env_file: ./qleverui/.env
     working_dir: /app
     entrypoint: /bin/bash -c
     command: >
@@ -25,7 +25,7 @@ services:
     image: adfreiburg/qlever-ui:latest
     container_name: qleverui
     volumes:
-      - ./qleverui/data/db:/app/db
+      - ./qleverui/data:/app/db
     working_dir: /app
     ports:
       - "7000:7000"
