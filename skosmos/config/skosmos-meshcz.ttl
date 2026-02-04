@@ -23,13 +23,13 @@
 :config a skosmos:Configuration ;
     # SPARQL endpoint
     #skosmos:sparqlEndpoint <http://localhost:3030/#/> ;
-    #skosmos:sparqlEndpoint <http://host.docker.internal:3030/skosmos> ;
-    skosmos:sparqlEndpoint <http://host.docker.internal:8088/> ;
+    skosmos:sparqlEndpoint <http://host.docker.internal:3030/skosmos> ;
+    #skosmos:sparqlEndpoint <http://host.docker.internal:8088/> ;
     ## You must setup a proxy when enabled:
     #skosmos:baseHref "https://test.medvik.cz/skosmos/" ;
     skosmos:customCss "resource/css/mdv-skosmos-custom.css" ;
-    ##skosmos:sparqlDialect "JenaText" ;
-    ##skosmos:sparqlCollationEnabled true ;
+    skosmos:sparqlDialect "JenaText" ;
+    skosmos:sparqlCollationEnabled true ;
     skosmos:sparqlTimeout 20 ;
     skosmos:httpTimeout 5 ;
     skosmos:serviceName "Medvik-Skosmos" ;
@@ -40,7 +40,6 @@
     skosmos:logBrowserConsole true ;
     skosmos:logFileName "skosmos_sparql.log" ;
     skosmos:templateCache "/tmp/skosmos-template-cache" ;
-    skosmos:customCss "resource/css/stylesheet.css" ;
     skosmos:feedbackAddress "medvik@nlk.cz" ;
     skosmos:feedbackSender "Medvik-Skosmos" ;
     skosmos:feedbackEnvelopeSender "" ;
