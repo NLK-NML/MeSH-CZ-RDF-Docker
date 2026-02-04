@@ -23,21 +23,22 @@
 :config a skosmos:Configuration ;
     # SPARQL endpoint
     #skosmos:sparqlEndpoint <http://localhost:3030/#/> ;
-    skosmos:sparqlEndpoint <http://host.docker.internal:3030/skosmos> ;
-    #skosmos:sparqlEndpoint <http://rog-fk:8088/default/sparql> ;
+    #skosmos:sparqlEndpoint <http://host.docker.internal:3030/skosmos> ;
+    skosmos:sparqlEndpoint <http://host.docker.internal:8088/> ;
     ## You must setup a proxy when enabled:
     #skosmos:baseHref "https://test.medvik.cz/skosmos/" ;
-    #skosmos:customCss "resource/css/mdv-skosmos-custom.css" ;
-    skosmos:sparqlDialect "JenaText" ;
-    skosmos:sparqlCollationEnabled true ;
+    skosmos:customCss "resource/css/mdv-skosmos-custom.css" ;
+    ##skosmos:sparqlDialect "JenaText" ;
+    ##skosmos:sparqlCollationEnabled true ;
     skosmos:sparqlTimeout 20 ;
     skosmos:httpTimeout 5 ;
     skosmos:serviceName "Medvik-Skosmos" ;
     skosmos:uiLanguageDropdown true ;
     skosmos:uiHoneypotEnabled true ;
     skosmos:uiHoneypotTime 5 ;
-    skosmos:logCaughtExceptions false ;
-    skosmos:logBrowserConsole false ;
+    skosmos:logCaughtExceptions true ;
+    skosmos:logBrowserConsole true ;
+    skosmos:logFileName "skosmos_sparql.log" ;
     skosmos:templateCache "/tmp/skosmos-template-cache" ;
     skosmos:customCss "resource/css/stylesheet.css" ;
     skosmos:feedbackAddress "medvik@nlk.cz" ;
@@ -61,7 +62,7 @@
     dc:title "Medical Subject Headings CZ"@en ;
     skosmos:shortName "MeSH-CZ" ;
     void:uriSpace "http://mesh.medvik.cz/" ;
-    void:dataDump <https://github.com/NLK-NML/MeSH-CZ-RDF/raw/refs/heads/main/meshcz/2026/SKOS/meshcz-skos.ttl.gz> ;
+    void:dataDump <https://github.com/NLK-NML/MeSH-CZ-RDF/raw/refs/heads/main/meshcz/2026/meshcz-skos.ttl.gz> ;
     skosmos:language "cs", "en" ;
     skosmos:defaultLanguage "en" ;
     skosmos:fallbackLanguages "en" ;
@@ -78,7 +79,7 @@
     # skosmos:hasMultiLingualProperty skos:scopeNote ;
     skosmos:sparqlGraph <http://mesh.medvik.cz/> .
 
-<https://github.com/NLK-NML/MeSH-CZ-RDF/raw/refs/heads/main/meshcz/2026/SKOS/meshcz-skos.ttl.gz>
+<https://github.com/NLK-NML/MeSH-CZ-RDF/raw/refs/heads/main/meshcz/2026/meshcz-skos.ttl.gz>
     dc:format "text/turtle" ;
     dc:language "en" .
 
