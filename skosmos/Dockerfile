@@ -52,6 +52,9 @@ RUN npm install --omit=dev
 # ---- Composer install (production-ready) ----
 RUN composer install --no-dev --optimize-autoloader
 
+RUN composer require symfony/runtime
+RUN bin/pull-translations CZ
+
 # ---- Permissions ----
 RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
 

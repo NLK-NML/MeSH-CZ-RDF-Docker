@@ -46,7 +46,7 @@
     skosmos:feedbackEnvelopeSender "" ;
     skosmos:globalPlugins () ;
     skosmos:languages (
-        # [ rdfs:label "cs" ; rdf:value "cs_CZ.utf8" ]
+        [ rdfs:label "cs" ; rdf:value "cs_CZ.utf8" ]
         [ rdfs:label "en" ; rdf:value "en_GB.utf8" ]
         [ rdfs:label "es" ; rdf:value "es_ES.utf8" ]
         [ rdfs:label "fi" ; rdf:value "fi_FI.utf8" ]
