@@ -44,7 +44,7 @@ RUN cp -a Skosmos/. /var/www/html/
 WORKDIR /var/www/html
 
 # ---- Download Skosmos release ----
-# RUN curl -sL https://github.com/NatLibFi/Skosmos/archive/refs/tags/v3.0.tar.gz | tar xz --strip-components=1
+# RUN curl -sL https://github.com/NatLibFi/Skosmos/archive/refs/tags/v3.1.tar.gz | tar xz --strip-components=1
 
 # Node / frontend dependencies
 RUN npm install --omit=dev
