@@ -11,5 +11,7 @@ services:
       context: ./skosmos
     image: skosmos-meshcz
     container_name: skosmos-meshcz
+    volumes:
+      - ./skosmos/logs:/skosmos/logs
     ports:
       - "8080:80"

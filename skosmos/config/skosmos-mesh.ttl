@@ -13,16 +13,17 @@
 @prefix mdrtype: <http://publications.europa.eu/resource/authority/dataset-type/> .
 @prefix mesh:   <http://id.nlm.nih.gov/mesh/> .
 @prefix meshcz: <http://mesh.medvik.cz/meshcz/> .
+@prefix meshfr: <http://mesh.inserm.fr/> .
 @prefix : <#> .
 
 # -----------------------------
 # Skosmos v3 main configuration
-# Version: 1.0.1 2026-01-28
+# Version: 1.0.2 2026-02-06
 # -----------------------------
 
 :config a skosmos:Configuration ;
     # SPARQL endpoint
-    #skosmos:sparqlEndpoint <http://localhost:3030/#/> ;
+    #skosmos:sparqlEndpoint <http://localhost:3030/> ;
     skosmos:sparqlEndpoint <http://host.docker.internal:3030/skosmos> ;
     #skosmos:sparqlEndpoint <http://host.docker.internal:8088/> ;
     ## You must setup a proxy when enabled:
@@ -38,7 +39,7 @@
     skosmos:uiHoneypotTime 5 ;
     skosmos:logCaughtExceptions true ;
     skosmos:logBrowserConsole true ;
-    skosmos:logFileName "skosmos_sparql.log" ;
+    skosmos:logFileName "/skosmos/logs/skosmos.log" ;
     skosmos:templateCache "/tmp/skosmos-template-cache" ;
     skosmos:feedbackAddress "medvik@nlk.cz" ;
     skosmos:feedbackSender "Medvik-Skosmos" ;
@@ -69,16 +70,37 @@
     skosmos:fullAlphabeticalIndex true ;
     skosmos:defaultSidebarView "hierarchy" ;
     skosmos:showDeprecated true ;
-    #skosmos:showNotation false ;
     skosmos:showNotation true ;
     skosmos:showStatistics false ;
     skosmos:searchByNotation true ;
     skosmos:sortByNotation true ;
-    # skosmos:marcSourceCode "cze"@cs, "eng"@en ;
     # skosmos:hasMultiLingualProperty skos:scopeNote ;
     skosmos:sparqlGraph <http://mesh.medvik.cz/> .
 
 <https://github.com/NLK-NML/MeSH-CZ-RDF/raw/refs/heads/main/meshcz/2026/meshcz-skos.ttl.gz>
     dc:format "text/turtle" ;
     dc:language "en" .
+
+
+# -----------------------------
+# MeSH-FR SKOS Vocabulary
+# -----------------------------
+
+:meshfr a skosmos:Vocabulary, void:Dataset ;
+    dc:title "Medical Subject Headings FR"@en ;
+    skosmos:shortName "MeSH-FR" ;
+    void:uriSpace "http://mesh.inserm.fr/" ;
+    skosmos:language "fr", "en" ;
+    skosmos:defaultLanguage "en" ;
+    skosmos:fallbackLanguages "en" ;
+    skosmos:showTopConcepts true ;
+    skosmos:fullAlphabeticalIndex true ;
+    skosmos:defaultSidebarView "hierarchy" ;
+    skosmos:showDeprecated true ;
+    skosmos:showNotation true ;
+    skosmos:showStatistics false ;
+    skosmos:searchByNotation true ;
+    skosmos:sortByNotation true ;
+    # skosmos:hasMultiLingualProperty skos:scopeNote ;
+    skosmos:sparqlGraph <http://mesh.inserm.fr/> .
 

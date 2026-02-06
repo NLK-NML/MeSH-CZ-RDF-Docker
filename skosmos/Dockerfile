@@ -1,4 +1,4 @@
-# Updated:   2026-02-03
+# Updated:   2026-02-06
 # Build image:
 # docker build -t skosmos-meshcz ./skosmos
 
@@ -56,7 +56,7 @@ RUN composer install --no-dev --optimize-autoloader
 RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
 
 # ---- Copy custom configuration ----
-COPY config/skosmos-meshcz.ttl /var/www/html/config.ttl
+COPY config/skosmos-mesh.ttl /var/www/html/config.ttl
 COPY config/mdv-skosmos-custom.css /var/www/html/resource/css/mdv-skosmos-custom.css
 COPY config/skosmos-vhost.txt /etc/apache2/sites-available/000-default.conf
 
