@@ -1,6 +1,8 @@
 # Updated:   2026-01-25
 # 1. Build and run:
 # docker-compose -f docker-skosmos.yaml up --build
+# Re-build:
+# docker-compose -f docker-skosmos.yaml up --build --no-cache
 # 2. Run:
 # docker-compose -f docker-skosmos.yaml up
 
