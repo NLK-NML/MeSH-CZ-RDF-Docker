@@ -2,8 +2,8 @@
 
 This repo installs standalone Docker containers to deploy:
 
-1. [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/index.html) server with MeSH-CZ RDF & SKOS datasets
-2. [Skosmos](https://skosmos.org/) for accessing the MeSH-CZ as SKOS
+1. [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/index.html) server loaded with MeSH-CZ RDF & SKOS datasets
+2. [Skosmos](https://github.com/NatLibFi/Skosmos) for accessing the MeSH-CZ data as SKOS
 
 [![Docker Image CI](https://github.com/NLK-NML/MeSH-CZ-RDF-Docker/actions/workflows/docker-image.yml/badge.svg)](https://github.com/NLK-NML/MeSH-CZ-RDF-Docker/actions/workflows/docker-image.yml)
 
