@@ -7,18 +7,21 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix wv: <http://vocab.org/waiver/terms/norms> .
 @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix schema: <https://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix skosmos: <http://purl.org/net/skosmos#> .
 @prefix isothes: <http://purl.org/iso25964/skos-thes#> .
 @prefix mdrtype: <http://publications.europa.eu/resource/authority/dataset-type/> .
 @prefix mesh:   <http://id.nlm.nih.gov/mesh/> .
-@prefix meshcz: <http://mesh.medvik.cz/meshcz/> .
-@prefix meshfr: <http://mesh.inserm.fr/> .
+@prefix mesht:  <http://www.medvik.cz/schema/mesh/vocab/#> .
+@prefix meshx:  <http://mesh.medvik.cz/> .
+@prefix medvik:  <https://medvik.cz/link/> .
+@prefix inserm:  <https://mesh.inserm.fr/arborescence/?sheetId=> .
 @prefix : <#> .
 
 # -----------------------------
 # Skosmos v3 main configuration
-# Version: 1.0.2 2026-02-06
+# Version: 1.0.3 2026-02-07
 # -----------------------------
 
 :config a skosmos:Configuration ;
@@ -67,13 +70,13 @@
     skosmos:defaultLanguage "en" ;
     skosmos:fallbackLanguages "en" ;
     skosmos:showTopConcepts true ;
-    skosmos:fullAlphabeticalIndex true ;
     skosmos:defaultSidebarView "hierarchy" ;
     skosmos:showDeprecated true ;
     skosmos:showNotation true ;
     skosmos:showStatistics false ;
     skosmos:searchByNotation true ;
     skosmos:sortByNotation true ;
+    skosmos:externalProperty mesht:extUrl ;
     # skosmos:hasMultiLingualProperty skos:scopeNote ;
     skosmos:sparqlGraph <http://mesh.medvik.cz/> .
 
@@ -94,13 +97,13 @@
     skosmos:defaultLanguage "en" ;
     skosmos:fallbackLanguages "en" ;
     skosmos:showTopConcepts true ;
-    skosmos:fullAlphabeticalIndex true ;
     skosmos:defaultSidebarView "hierarchy" ;
     skosmos:showDeprecated true ;
     skosmos:showNotation true ;
     skosmos:showStatistics false ;
     skosmos:searchByNotation true ;
     skosmos:sortByNotation true ;
+    skosmos:externalProperty mesht:extUrl ;
     # skosmos:hasMultiLingualProperty skos:scopeNote ;
     skosmos:sparqlGraph <http://mesh.inserm.fr/> .
 
