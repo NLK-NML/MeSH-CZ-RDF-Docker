@@ -72,10 +72,11 @@
     skosmos:showTopConcepts true ;
     skosmos:defaultSidebarView "hierarchy" ;
     skosmos:showDeprecated true ;
-    skosmos:showNotation true ;
+    skosmos:showNotation false ;
     skosmos:showStatistics false ;
     skosmos:searchByNotation true ;
     skosmos:sortByNotation true ;
+    skosmos:loadExternalResources false ;
     # skosmos:externalProperty mesht:extUrl ;
     # skosmos:hasMultiLingualProperty skos:scopeNote ;
     skosmos:sparqlGraph <http://mesh.medvik.cz/> .
@@ -103,6 +104,7 @@
     skosmos:showStatistics false ;
     skosmos:searchByNotation true ;
     skosmos:sortByNotation true ;
+    skosmos:loadExternalResources false ;
     # skosmos:externalProperty mesht:extUrl ;
     # skosmos:hasMultiLingualProperty skos:scopeNote ;
     skosmos:sparqlGraph <http://mesh.inserm.fr/> .
