@@ -74,7 +74,7 @@
     skosmos:showDeprecated true ;
     skosmos:showNotation true ;
     skosmos:showStatistics false ;
-    skosmos:searchByNotation true ;
+    skosmos:searchByNotation false ;
     skosmos:sortByNotation true ;
     skosmos:externalProperty mesht:extUrl ;
     # skosmos:hasMultiLingualProperty skos:scopeNote ;
@@ -101,7 +101,7 @@
     skosmos:showDeprecated true ;
     skosmos:showNotation true ;
     skosmos:showStatistics false ;
-    skosmos:searchByNotation true ;
+    skosmos:searchByNotation false ;
     skosmos:sortByNotation true ;
     skosmos:externalProperty mesht:extUrl ;
     # skosmos:hasMultiLingualProperty skos:scopeNote ;
