@@ -1,9 +1,11 @@
-# Publish MeSH-CZ RDF datasets using SPARQL server
+# Explore MeSH-CZ RDF datasets
+
+This project is **primarily intended for testing**.
 
 This repo installs standalone Docker containers to deploy:
 
 1. [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/index.html) server loaded with MeSH-CZ RDF & SKOS datasets
-2. [Skosmos](https://github.com/NatLibFi/Skosmos) for accessing the MeSH-CZ data as SKOS
+2. [Skosmos](https://github.com/NatLibFi/Skosmos) for browsing and querying the MeSH-CZ SKOS dataset
 
 [![Docker Image CI](https://github.com/NLK-NML/MeSH-CZ-RDF-Docker/actions/workflows/docker-image.yml/badge.svg)](https://github.com/NLK-NML/MeSH-CZ-RDF-Docker/actions/workflows/docker-image.yml)
 
