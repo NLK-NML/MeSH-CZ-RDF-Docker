@@ -82,8 +82,7 @@
     skosmos:sparqlGraph <http://mesh.medvik.cz/> .
 
 <https://github.com/NLK-NML/MeSH-CZ-RDF/raw/refs/heads/main/meshcz/2026/meshcz-skos.ttl.gz>
-    dc:format "text/turtle" ;
-    dc:language "en" .
+    dc:format "text/turtle" .
 
 
 # -----------------------------
