@@ -1,4 +1,4 @@
-# Updated:   2026-02-06
+# Updated:   2026-02-11
 # Build image:
 # docker build -t skosmos-meshcz ./skosmos
 
@@ -7,12 +7,11 @@ FROM debian:stable-slim
 ARG DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8
 
-ENV SKOSMOS_GIT=https://github.com/NatLibFi/Skosmos.git
-#ENV SKOSMOS_BRANCH=v3.1
-ENV SKOSMOS_BRANCH=main
+#ENV SKOSMOS_GIT=https://github.com/NatLibFi/Skosmos.git
+#ENV SKOSMOS_BRANCH=main
 
-#ENV SKOSMOS_GIT=https://github.com/filak/Skosmos
-#ENV SKOSMOS_BRANCH=local-patch-filak-1
+ENV SKOSMOS_GIT=https://github.com/filak/Skosmos
+ENV SKOSMOS_BRANCH=local-patch-filak-1
 
 # ---- System dependencies ----
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -55,9 +54,11 @@ RUN npm install --omit=dev
 
 # ---- Composer install (production-ready) ----
 RUN composer install --no-dev --optimize-autoloader
+#RUN composer install
 
 RUN composer require symfony/runtime
 RUN bin/pull-translations CZ
+#RUN bin/pull-translations FR
 
 # ---- Permissions ----
 RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
@@ -66,6 +67,13 @@ RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
 COPY config/skosmos-mesh.ttl /var/www/html/config.ttl
 COPY config/mdv-skosmos-custom.css /var/www/html/resource/css/mdv-skosmos-custom.css
 COPY config/skosmos-vhost.txt /etc/apache2/sites-available/000-default.conf
+
+# ---- Debug and patching ----
+#COPY config/php-debug.ini /etc/php/8.4/apache2/conf.d/99-debug.ini
+#COPY patches/Concept.php /var/www/html/src/model/Concept.php
+#COPY patches/GenericSparql.php /var/www/html/src/model/sparql/GenericSparql.php
+#COPY patches/search-results.inc.twig /var/www/html/src/view/patches/search-results.inc.twig
+#RUN rm -rf /tmp/skosmos-template-cache/*
 
 # ---- Expose Apache ----
 EXPOSE 80
