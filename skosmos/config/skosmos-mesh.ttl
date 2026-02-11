@@ -71,14 +71,14 @@
     skosmos:fallbackLanguages "en" ;
     skosmos:showTopConcepts true ;
     skosmos:defaultSidebarView "hierarchy" ;
-    skosmos:sidebarViews ( "hierarchy" );
+    skosmos:sidebarViews ( "hierarchy" ) ;
     skosmos:showDeprecated true ;
     skosmos:showNotation false ;
     skosmos:showStatistics false ;
     skosmos:searchByNotation true ;
     skosmos:sortByNotation true ;
     skosmos:loadExternalResources false ;
-    skosmos:externalProperty mesht:extUrl , foaf:page , foaf:homepage ;
+    skosmos:externalProperty (mesht:extUrl foaf:page foaf:homepage) ;
     skosmos:hasMultiLingualProperty skos:notation ;
     skosmos:sparqlGraph <http://mesh.medvik.cz/> .
 
@@ -100,14 +100,14 @@
     skosmos:fallbackLanguages "en" ;
     skosmos:showTopConcepts true ;
     skosmos:defaultSidebarView "hierarchy" ;
-    skosmos:sidebarViews ( "hierarchy" );
+    skosmos:sidebarViews ( "hierarchy" ) ;
     skosmos:showDeprecated true ;
     skosmos:showNotation false ;
     skosmos:showStatistics false ;
     skosmos:searchByNotation true ;
     skosmos:sortByNotation true ;
     skosmos:loadExternalResources false ;
-    skosmos:externalProperty mesht:extUrl ;
-    skosmos:hasMultiLingualProperty skos:scopeNote ;
+    skosmos:externalProperty ( mesht:extUrl ) ;
+    # skosmos:hasMultiLingualProperty skos:notation ;
     skosmos:sparqlGraph <http://mesh.inserm.fr/> .
 
