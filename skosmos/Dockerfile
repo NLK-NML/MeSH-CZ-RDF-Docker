@@ -8,8 +8,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8
 
 ENV SKOSMOS_GIT=https://github.com/NatLibFi/Skosmos.git
-ENV SKOSMOS_BRANCH=v3.1
-#ENV SKOSMOS_BRANCH=main
+#ENV SKOSMOS_BRANCH=v3.1
+ENV SKOSMOS_BRANCH=main
 
 #ENV SKOSMOS_GIT=https://github.com/filak/Skosmos
 #ENV SKOSMOS_BRANCH=local-patch-filak-1
