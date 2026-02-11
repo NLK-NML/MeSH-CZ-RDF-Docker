@@ -51,10 +51,9 @@
     skosmos:languages (
         [ rdfs:label "cs" ; rdf:value "cs_CZ.utf8" ]
         [ rdfs:label "en" ; rdf:value "en_GB.utf8" ]
-        [ rdfs:label "es" ; rdf:value "es_ES.utf8" ]
-        [ rdfs:label "fi" ; rdf:value "fi_FI.utf8" ]
+        #[ rdfs:label "es" ; rdf:value "es_ES.utf8" ]
         [ rdfs:label "fr" ; rdf:value "fr_FR.utf8" ]
-        [ rdfs:label "it" ; rdf:value "it_IT.utf8" ]
+        #[ rdfs:label "it" ; rdf:value "it_IT.utf8" ]
     ) .
 
 # -----------------------------
@@ -78,7 +77,7 @@
     skosmos:searchByNotation true ;
     skosmos:sortByNotation true ;
     skosmos:loadExternalResources false ;
-    skosmos:externalProperty (mesht:extUrl foaf:page foaf:homepage) ;
+    # skosmos:externalProperty mesht:extUrl ;
     skosmos:hasMultiLingualProperty skos:notation ;
     skosmos:sparqlGraph <http://mesh.medvik.cz/> .
 
@@ -107,7 +106,7 @@
     skosmos:searchByNotation true ;
     skosmos:sortByNotation true ;
     skosmos:loadExternalResources false ;
-    skosmos:externalProperty ( mesht:extUrl ) ;
-    # skosmos:hasMultiLingualProperty skos:notation ;
+    # skosmos:externalProperty mesht:extUrl ;
+    skosmos:hasMultiLingualProperty skos:notation ;
     skosmos:sparqlGraph <http://mesh.inserm.fr/> .
 
