@@ -31,7 +31,7 @@
     #skosmos:sparqlEndpoint <http://host.docker.internal:8088/> ;
     ## You must setup a proxy when enabled:
     #skosmos:baseHref "https://test.medvik.cz/skosmos/" ;
-    skosmos:customCss "resource/css/mdv-skosmos-custom.css" ;
+    #skosmos:customCss "resource/css/mdv-skosmos-custom.css" ;
     skosmos:sparqlDialect "JenaText" ;
     skosmos:sparqlCollationEnabled true ;
     skosmos:sparqlTimeout 20 ;
@@ -106,6 +106,6 @@
     skosmos:sortByNotation true ;
     skosmos:loadExternalResources false ;
     # skosmos:externalProperty mesht:extUrl ;
-    skosmos:hasMultiLingualProperty skos:notation ;
+    skosmos:hasMultiLingualProperty skos:notation, skos:scopeNote ;
     skosmos:sparqlGraph <http://mesh.inserm.fr/> .
 
