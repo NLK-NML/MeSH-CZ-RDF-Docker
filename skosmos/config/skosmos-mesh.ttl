@@ -15,8 +15,8 @@
 @prefix mesh:   <http://id.nlm.nih.gov/mesh/> .
 @prefix mesht:  <http://www.medvik.cz/schema/mesh/vocab/#> .
 @prefix meshx:  <http://mesh.medvik.cz/> .
-@prefix medvik:  <https://medvik.cz/link/> .
-@prefix inserm:  <https://mesh.inserm.fr/arborescence/?sheetId=> .
+#@prefix medvik:  <https://medvik.cz/link/> .
+#@prefix inserm:  <https://mesh.inserm.fr/arborescence/?sheetId=> .
 @prefix : <#> .
 
 # -----------------------------
@@ -67,18 +67,19 @@
     void:uriSpace "http://mesh.medvik.cz/" ;
     void:dataDump <https://github.com/NLK-NML/MeSH-CZ-RDF/raw/refs/heads/main/meshcz/2026/meshcz-skos.ttl.gz> ;
     skosmos:language "cs", "en" ;
-    skosmos:defaultLanguage "en" ;
+    skosmos:defaultLanguage "cs" ;
     skosmos:fallbackLanguages "en" ;
     skosmos:showTopConcepts true ;
     skosmos:defaultSidebarView "hierarchy" ;
+    skosmos:sidebarViews ( "hierarchy" );
     skosmos:showDeprecated true ;
     skosmos:showNotation false ;
     skosmos:showStatistics false ;
     skosmos:searchByNotation true ;
     skosmos:sortByNotation true ;
     skosmos:loadExternalResources false ;
-    # skosmos:externalProperty mesht:extUrl ;
-    # skosmos:hasMultiLingualProperty skos:scopeNote ;
+    skosmos:externalProperty mesht:extUrl , foaf:page , foaf:homepage ;
+    skosmos:hasMultiLingualProperty skos:notation ;
     skosmos:sparqlGraph <http://mesh.medvik.cz/> .
 
 <https://github.com/NLK-NML/MeSH-CZ-RDF/raw/refs/heads/main/meshcz/2026/meshcz-skos.ttl.gz>
@@ -95,17 +96,18 @@
     skosmos:shortName "MeSH-FR" ;
     void:uriSpace "http://mesh.inserm.fr/" ;
     skosmos:language "fr", "en" ;
-    skosmos:defaultLanguage "en" ;
+    skosmos:defaultLanguage "fr" ;
     skosmos:fallbackLanguages "en" ;
     skosmos:showTopConcepts true ;
     skosmos:defaultSidebarView "hierarchy" ;
+    skosmos:sidebarViews ( "hierarchy" );
     skosmos:showDeprecated true ;
-    skosmos:showNotation true ;
+    skosmos:showNotation false ;
     skosmos:showStatistics false ;
     skosmos:searchByNotation true ;
     skosmos:sortByNotation true ;
     skosmos:loadExternalResources false ;
-    # skosmos:externalProperty mesht:extUrl ;
-    # skosmos:hasMultiLingualProperty skos:scopeNote ;
+    skosmos:externalProperty mesht:extUrl ;
+    skosmos:hasMultiLingualProperty skos:scopeNote ;
     skosmos:sparqlGraph <http://mesh.inserm.fr/> .
 
