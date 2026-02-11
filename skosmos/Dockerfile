@@ -72,7 +72,6 @@ COPY config/skosmos-vhost.txt /etc/apache2/sites-available/000-default.conf
 #COPY config/php-debug.ini /etc/php/8.4/apache2/conf.d/99-debug.ini
 #COPY patches/Concept.php /var/www/html/src/model/Concept.php
 #COPY patches/GenericSparql.php /var/www/html/src/model/sparql/GenericSparql.php
-#COPY patches/search-results.inc.twig /var/www/html/src/view/patches/search-results.inc.twig
 #RUN rm -rf /tmp/skosmos-template-cache/*
 
 # ---- Expose Apache ----
